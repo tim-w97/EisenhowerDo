@@ -1,4 +1,7 @@
 type Todo = {
+  // ID of the Todo (UUID v4)
+  id: string;
+
   // the title of the Todo
   title: string;
 

@@ -1,14 +1,14 @@
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import React from 'react';
+import TodoListEntry from '../views/TodoListEntry.tsx';
+import dummyTodos from '../sampleData/dummyTodos.json';
 
 function MyTodosScreen() {
   return (
     <SafeAreaView>
-      <Text>Todo 1</Text>
-      <Text>Todo 1</Text>
-      <Text>Todo 1</Text>
-      <Text>Todo 1</Text>
-      <Text>Todo 1</Text>
+      {dummyTodos.map(todo => (
+        <TodoListEntry key={todo.id} todo={todo} />
+      ))}
     </SafeAreaView>
   );
 }
