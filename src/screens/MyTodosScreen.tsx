@@ -4,8 +4,13 @@ import TodoListEntry from '../views/TodoListEntry.tsx';
 import dummyTodos from '../sampleData/dummyTodos.json';
 import {NavigationProp} from '@react-navigation/native';
 
+type RootStackParamList = {
+  // undefined means that AddTodo doesn't receive any params
+  AddTodo: undefined;
+};
+
 type Props = {
-  navigation: NavigationProp<any>;
+  navigation: NavigationProp<RootStackParamList>;
 };
 
 function MyTodosScreen({navigation}: Props) {
