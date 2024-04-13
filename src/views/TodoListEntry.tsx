@@ -1,7 +1,7 @@
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
 import Todo from '../types/todo.ts';
 import React, {useState} from 'react';
-import Icon from 'react-native-vector-icons/Fontisto';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons.js';
 
 type TodoListEntryProps = {
   todo: Todo;
@@ -15,7 +15,7 @@ function TodoListEntry({todo, styles}: TodoListEntryProps) {
     <View style={[styles, listEntryStyles.listEntry]} onTouchEnd={onToggle}>
       <Text style={listEntryStyles.todoTitle}>{todo.title}</Text>
       <Icon
-        name={isCompleted ? 'checkbox-active' : 'checkbox-passive'}
+        name={isCompleted ? 'checkbox-outline' : 'checkbox-blank-outline'}
         size={30}
       />
     </View>
