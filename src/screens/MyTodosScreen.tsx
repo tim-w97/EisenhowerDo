@@ -2,8 +2,17 @@ import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import TodoListEntry from '../views/TodoListEntry.tsx';
 import dummyTodos from '../sampleData/dummyTodos.json';
+import {NavigationProp} from '@react-navigation/native';
 
-function MyTodosScreen() {
+type Props = {
+  navigation: NavigationProp<any>;
+};
+
+function MyTodosScreen({navigation}: Props) {
+  function onAddNewTodo() {
+    navigation.navigate('AddTodo');
+  }
+
   return (
     <SafeAreaView>
       <View style={styles.listContainer}>
@@ -12,7 +21,7 @@ function MyTodosScreen() {
         ))}
       </View>
       <View style={styles.biggerMargin}>
-        <Button title="Neues Todo hinzufügen" />
+        <Button title="Neues Todo hinzufügen" onPress={onAddNewTodo} />
       </View>
     </SafeAreaView>
   );

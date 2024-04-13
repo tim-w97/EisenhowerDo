@@ -10,8 +10,16 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MyTodos">
-        <Stack.Screen name="MyTodos" component={MyTodosScreen} />
-        <Stack.Screen name="AddTodo" component={AddTodoScreen} />
+        <Stack.Screen
+          name="MyTodos"
+          component={MyTodosScreen}
+          options={{title: 'Meine Todos'}}
+        />
+        <Stack.Screen
+          name="AddTodo"
+          component={AddTodoScreen}
+          options={{title: 'Neues Todo hinzufügen'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
