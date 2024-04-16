@@ -3,6 +3,8 @@ import React from 'react';
 import TodoListEntry from '../views/TodoListEntry.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
+import {useSelector} from 'react-redux';
+import TodosState from '../types/todosState.ts';
 
 type RootStackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -14,6 +16,8 @@ type Props = {
 };
 
 function MyTodosScreen({navigation}: Props) {
+  const todos = useSelector((state: TodosState) => state.todos);
+
   function onAddNewTodo() {
     navigation.navigate('AddTodo');
   }
@@ -21,7 +25,7 @@ function MyTodosScreen({navigation}: Props) {
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <View>
-        {dummyTodos.map(todo => (
+        {todos.map(todo => (
           <TodoListEntry styles={styles.listEntry} key={todo.id} todo={todo} />
         ))}
       </View>

@@ -11,6 +11,11 @@ import globalStyles from '../styles/globalStyles.ts';
 import store from '../redux/store.ts';
 import {addTodo} from '../redux/todosSlice.ts';
 import Todo from '../types/todo.ts';
+import 'react-native-get-random-values';
+import {v4 as generateUUID} from 'uuid';
+
+let currentTitle: string = '';
+let currentText: string = '';
 
 function AddTodoScreen(): React.JSX.Element {
   return (
@@ -20,8 +25,16 @@ function AddTodoScreen(): React.JSX.Element {
       </Text>
 
       <View style={styles.inputFields}>
-        <TextInput placeholder="Titel" />
-        <TextInput multiline={true} numberOfLines={3} placeholder="Text" />
+        <TextInput
+          placeholder="Titel"
+          onChangeText={text => (currentTitle = text)}
+        />
+        <TextInput
+          multiline={true}
+          numberOfLines={3}
+          placeholder="Text"
+          onChangeText={text => (currentText = text)}
+        />
       </View>
       <Button title="Todo hinzufügen" onPress={onAddTodo} />
     </SafeAreaView>
@@ -29,7 +42,14 @@ function AddTodoScreen(): React.JSX.Element {
 }
 
 function onAddTodo() {
-  const newTodo: Todo = {};
+  const newTodo: Todo = {
+    id: generateUUID(),
+    title: currentTitle,
+    text: currentText,
+    isCompleted: false,
+    isImportant: false,
+    isUrgent: false,
+  };
 
   store.dispatch(addTodo(newTodo));
 }

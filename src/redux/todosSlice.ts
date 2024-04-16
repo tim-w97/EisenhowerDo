@@ -1,15 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import Todo from '../types/todo.ts';
 import initialTodos from '../sampleData/initialTodos.ts';
-
-type TodosState = {
-  todos: Todo[];
-};
-
-type TodoStatus = {
-  todoID: string;
-  isCompleted: boolean;
-};
+import TodosState from '../types/todosState.ts';
+import TodoStatus from '../types/todoStatus.ts';
 
 const todosSlice = createSlice({
   name: 'todos',
