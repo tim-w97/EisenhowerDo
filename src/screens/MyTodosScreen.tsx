@@ -3,9 +3,10 @@ import React from 'react';
 import TodoListEntry from '../views/TodoListEntry.tsx';
 import dummyTodos from '../sampleData/dummyTodos.json';
 import {NavigationProp} from '@react-navigation/native';
+import globalStyles from '../styles/globalStyles.ts';
 
 type RootStackParamList = {
-  // undefined means that AddTodo doesn't receive any params
+  // undefined means that this screen doesn't receive any params
   AddTodo: undefined;
 };
 
@@ -19,13 +20,13 @@ function MyTodosScreen({navigation}: Props) {
   }
 
   return (
-    <SafeAreaView>
-      <View style={styles.listContainer}>
+    <SafeAreaView style={globalStyles.safeArea}>
+      <View>
         {dummyTodos.map(todo => (
           <TodoListEntry styles={styles.listEntry} key={todo.id} todo={todo} />
         ))}
       </View>
-      <View style={styles.biggerMargin}>
+      <View style={styles.button}>
         <Button title="Neues Todo hinzufügen" onPress={onAddNewTodo} />
       </View>
     </SafeAreaView>
@@ -33,14 +34,11 @@ function MyTodosScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
-    margin: 10,
-  },
   listEntry: {
-    margin: 10,
+    marginBottom: 20,
   },
-  biggerMargin: {
-    margin: 50,
+  button: {
+    marginTop: 30,
   },
 });
 

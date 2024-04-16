@@ -7,17 +7,20 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import globalStyles from '../styles/globalStyles.ts';
 
 function AddTodoScreen(): React.JSX.Element {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Füge ein neues Todo hinzu</Text>
+    <SafeAreaView style={globalStyles.safeArea}>
+      <Text style={[globalStyles.bigTitle, styles.title]}>
+        Füge ein neues Todo hinzu
+      </Text>
 
       <View style={styles.inputFields}>
-        <TextInput placeholder={'Titel'} />
-        <TextInput multiline={true} numberOfLines={3} placeholder={'Text'} />
+        <TextInput placeholder="Titel" />
+        <TextInput multiline={true} numberOfLines={3} placeholder="Text" />
       </View>
-      <Button title={'Todo hinzufügen'} onPress={addTodo} />
+      <Button title="Todo hinzufügen" onPress={addTodo} />
     </SafeAreaView>
   );
 }
@@ -27,12 +30,7 @@ function addTodo() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
   title: {
-    fontWeight: 'bold',
-    fontSize: 20,
     marginBottom: 10,
   },
   inputFields: {
