@@ -1,7 +1,6 @@
 import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import TodoListEntry from '../views/TodoListEntry.tsx';
-import dummyTodos from '../sampleData/dummyTodos.json';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 
