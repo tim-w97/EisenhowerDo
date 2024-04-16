@@ -13,11 +13,21 @@ import {addTodo} from '../redux/todosSlice.ts';
 import Todo from '../types/todo.ts';
 import 'react-native-get-random-values';
 import {v4 as generateUUID} from 'uuid';
+import {NavigationProp} from '@react-navigation/native';
 
-let currentTitle: string = '';
-let currentText: string = '';
+type RootStackParamList = {
+  // undefined means that this screen doesn't receive any params
+  MyTodos: undefined;
+};
 
-function AddTodoScreen(): React.JSX.Element {
+type Props = {
+  navigation: NavigationProp<RootStackParamList>;
+};
+
+function AddTodoScreen({navigation}: Props): React.JSX.Element {
+  let currentTitle: string = '';
+  let currentText: string = '';
+
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <Text style={[globalStyles.bigTitle, styles.title]}>
@@ -39,19 +49,21 @@ function AddTodoScreen(): React.JSX.Element {
       <Button title="Todo hinzufügen" onPress={onAddTodo} />
     </SafeAreaView>
   );
-}
 
-function onAddTodo() {
-  const newTodo: Todo = {
-    id: generateUUID(),
-    title: currentTitle,
-    text: currentText,
-    isCompleted: false,
-    isImportant: false,
-    isUrgent: false,
-  };
+  function onAddTodo() {
+    const newTodo: Todo = {
+      id: generateUUID(),
+      title: currentTitle,
+      text: currentText,
+      isCompleted: false,
+      isImportant: false,
+      isUrgent: false,
+    };
 
-  store.dispatch(addTodo(newTodo));
+    store.dispatch(addTodo(newTodo));
+
+    navigation.goBack();
+  }
 }
 
 const styles = StyleSheet.create({
