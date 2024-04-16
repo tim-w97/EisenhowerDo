@@ -1,7 +1,10 @@
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
 import Todo from '../types/todo.ts';
-import React, {useState} from 'react';
+import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons.js';
+import store from '../redux/store.ts';
+import todosSlice from '../redux/todosSlice.ts';
+import TodoStatus from '../types/todoStatus.ts';
 
 type TodoListEntryProps = {
   todo: Todo;
@@ -9,20 +12,24 @@ type TodoListEntryProps = {
 };
 
 function TodoListEntry({todo, styles}: TodoListEntryProps) {
-  const [isCompleted, setIsCompleted] = useState(false);
-
   return (
-    <View style={[styles, listEntryStyles.listEntry]} onTouchEnd={onToggle}>
+    <View style={[styles, listEntryStyles.listEntry]}>
       <Text style={listEntryStyles.todoTitle}>{todo.title}</Text>
       <Icon
-        name={isCompleted ? 'checkbox-outline' : 'checkbox-blank-outline'}
+        name={todo.isCompleted ? 'checkbox-outline' : 'checkbox-blank-outline'}
         size={30}
+        onPress={onSetCompleted}
       />
     </View>
   );
 
-  function onToggle() {
-    setIsCompleted(!isCompleted);
+  function onSetCompleted() {
+    const newStatus: TodoStatus = {
+      todoID: todo.id,
+      isCompleted: !todo.isCompleted,
+    };
+
+    store.dispatch(todosSlice.actions.setTodoCompleted(newStatus));
   }
 }
 
