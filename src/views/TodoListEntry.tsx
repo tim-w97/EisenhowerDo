@@ -14,11 +14,20 @@ type TodoListEntryProps = {
 function TodoListEntry({todo, styles}: TodoListEntryProps) {
   return (
     <View style={[styles, listEntryStyles.listEntry]}>
-      <Text style={listEntryStyles.todoTitle}>{todo.title}</Text>
+      <Text
+        style={[
+          listEntryStyles.todoTitle,
+          todo.isCompleted
+            ? listEntryStyles.completedTodo
+            : listEntryStyles.openTodo,
+        ]}>
+        {todo.title}
+      </Text>
       <Icon
         name={todo.isCompleted ? 'checkbox-outline' : 'checkbox-blank-outline'}
         size={30}
         onPress={onSetCompleted}
+        style={listEntryStyles.checkmark}
       />
     </View>
   );
@@ -38,13 +47,26 @@ const listEntryStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    alignItems: 'center',
     backgroundColor: 'lightblue',
     borderRadius: 5,
+    paddingLeft: 20,
   },
+
+  checkmark: {
+    padding: 20,
+  },
+
   todoTitle: {
-    fontWeight: 'bold',
     fontSize: 18,
+  },
+
+  openTodo: {
+    fontWeight: 'bold',
+  },
+
+  completedTodo: {
+    textDecorationLine: 'line-through',
   },
 });
 export default TodoListEntry;
