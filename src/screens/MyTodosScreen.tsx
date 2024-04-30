@@ -23,7 +23,7 @@ function MyTodosScreen({navigation}: Props) {
   }
 
   return (
-    <SafeAreaView style={globalStyles.safeArea}>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.todoItems}>
         {todos.map(todo => (
           <TodoItem key={todo.id} todo={todo} />
@@ -37,12 +37,17 @@ function MyTodosScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    ...globalStyles.safeArea,
+    padding: 7,
+  },
   todoItems: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   button: {
+    padding: 13,
     marginTop: 30,
   },
 });

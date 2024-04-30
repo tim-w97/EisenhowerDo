@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     width: '33.3%',
     height: '33.3%',
-    padding: 5,
+    padding: 7,
   },
   todoItem: {
     backgroundColor: 'lightyellow',
