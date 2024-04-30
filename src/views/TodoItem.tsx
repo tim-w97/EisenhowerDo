@@ -1,18 +1,17 @@
-import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Todo from '../types/todo.ts';
 import React from 'react';
 
 type TodoItemProps = {
   todo: Todo;
-  onTap: () => void;
-  styles?: StyleProp<ViewStyle>;
+  onTap: (todoID: string) => void;
 };
 
-function TodoItem(props: TodoItemProps) {
+function TodoItem({todo, onTap}: TodoItemProps) {
   return (
-    <View style={styles.container} onTouchEnd={props.onTap}>
+    <View style={styles.container} onTouchEnd={() => onTap(todo.id)}>
       <View style={styles.todoItem}>
-        <Text>{props.todo.title}</Text>
+        <Text>{todo.title}</Text>
       </View>
     </View>
   );
