@@ -1,6 +1,6 @@
 import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import React from 'react';
-import TodoListEntry from '../views/TodoListEntry.tsx';
+import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import {useSelector} from 'react-redux';
@@ -24,9 +24,9 @@ function MyTodosScreen({navigation}: Props) {
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>
-      <View>
+      <View style={styles.todoItems}>
         {todos.map(todo => (
-          <TodoListEntry styles={styles.listEntry} key={todo.id} todo={todo} />
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </View>
       <View style={styles.button}>
@@ -37,8 +37,10 @@ function MyTodosScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  listEntry: {
-    marginBottom: 20,
+  todoItems: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   button: {
     marginTop: 30,
