@@ -8,8 +8,8 @@ type StackParamList = {
 };
 
 type Props = {
-  navigation: NavigationProp<StackParamList, 'TodoDetails'>;
-  route: RouteProp<StackParamList, 'TodoDetails'>;
+  navigation: NavigationProp<StackParamList>;
+  route: RouteProp<StackParamList>;
 };
 
 function TodoDetailsScreen({route, navigation}: Props) {

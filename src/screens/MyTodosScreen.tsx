@@ -6,7 +6,7 @@ import globalStyles from '../styles/globalStyles.ts';
 import {useSelector} from 'react-redux';
 import TodosState from '../types/todosState.ts';
 
-type RootStackParamList = {
+type StackParamList = {
   // undefined means that this screen doesn't receive any params
   AddTodo: undefined;
 
@@ -14,7 +14,7 @@ type RootStackParamList = {
 };
 
 type Props = {
-  navigation: NavigationProp<RootStackParamList>;
+  navigation: NavigationProp<StackParamList>;
 };
 
 function MyTodosScreen({navigation}: Props) {

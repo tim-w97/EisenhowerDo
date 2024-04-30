@@ -15,13 +15,13 @@ import {v4 as generateUUID} from 'uuid';
 import {NavigationProp} from '@react-navigation/native';
 import todosSlice from '../redux/todosSlice.ts';
 
-type RootStackParamList = {
+type StackParamList = {
   // undefined means that this screen doesn't receive any params
   MyTodos: undefined;
 };
 
 type Props = {
-  navigation: NavigationProp<RootStackParamList>;
+  navigation: NavigationProp<StackParamList>;
 };
 
 function AddTodoScreen({navigation}: Props): React.JSX.Element {
