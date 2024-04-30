@@ -9,6 +9,7 @@ import TodosState from '../types/todosState.ts';
 type RootStackParamList = {
   // undefined means that this screen doesn't receive any params
   AddTodo: undefined;
+  TodoDetails: undefined;
 };
 
 type Props = {
@@ -22,11 +23,15 @@ function MyTodosScreen({navigation}: Props) {
     navigation.navigate('AddTodo');
   }
 
+  function onTodoItemTapped() {
+    navigation.navigate('TodoDetails');
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.todoItems}>
         {todos.map(todo => (
-          <TodoItem key={todo.id} todo={todo} />
+          <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
         ))}
       </View>
       <View style={styles.button}>

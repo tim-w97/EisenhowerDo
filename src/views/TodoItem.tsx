@@ -4,12 +4,13 @@ import React from 'react';
 
 type TodoItemProps = {
   todo: Todo;
+  onTap: () => void;
   styles?: StyleProp<ViewStyle>;
 };
 
 function TodoItem(props: TodoItemProps) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onTouchEnd={props.onTap}>
       <View style={styles.todoItem}>
         <Text>{props.todo.title}</Text>
       </View>

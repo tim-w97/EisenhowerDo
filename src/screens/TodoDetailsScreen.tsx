@@ -2,7 +2,7 @@ import {Button, SafeAreaView, Text, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React from 'react';
 
-function TodoDetailScreen() {
+function TodoDetailsScreen() {
   function onMarkTodoAsCompleted() {}
 
   return (
@@ -21,4 +21,4 @@ function TodoDetailScreen() {
   );
 }
 
-export default TodoDetailScreen;
+export default TodoDetailsScreen;
