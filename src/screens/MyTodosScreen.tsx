@@ -5,6 +5,7 @@ import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import {useSelector} from 'react-redux';
 import TodosState from '../types/todosState.ts';
+import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -18,7 +19,7 @@ type Props = {
 };
 
 function MyTodosScreen({navigation}: Props) {
-  const todos = useSelector((state: TodosState) => state.todos);
+  const todos = useSelector(selectAllTodos());
 
   function onAddNewTodo() {
     navigation.navigate('AddTodo');

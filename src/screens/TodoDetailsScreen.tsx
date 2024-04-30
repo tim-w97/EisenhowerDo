@@ -2,6 +2,8 @@ import {Button, SafeAreaView, Text, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
 
 type StackParamList = {
   TodoDetails: {todoID: string};
@@ -13,7 +15,11 @@ type Props = {
 };
 
 function TodoDetailsScreen({route, navigation}: Props) {
-  const {todoID} = route.params;
+  const todo = useSelector(selectSingleTodo(route.params.todoID));
+
+  if (!todo) {
+    throw new Error("Todo with id ${route.params.todoID} doesn't exist.");
+  }
 
   function onMarkTodoAsCompleted() {
     navigation.goBack();
@@ -22,8 +28,8 @@ function TodoDetailsScreen({route, navigation}: Props) {
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <View>
-        <Text>{todoID}</Text>
-        <Text>Hier kommt der Text hin hin</Text>
+        <Text>{todo.title}</Text>
+        <Text>{todo.text}</Text>
       </View>
       <View>
         <Button
