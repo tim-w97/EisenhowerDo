@@ -28,6 +28,7 @@ function App(): React.JSX.Element {
           />
           <Stack.Screen
             name="TodoDetails"
+            // TODO: fix this typing error
             component={TodoDetailsScreen}
             options={{title: 'Details zu Todo'}}
           />
