@@ -9,10 +9,8 @@ type TodoItemProps = {
 
 function TodoItem({todo, onTap}: TodoItemProps) {
   return (
-    <View style={styles.container} onTouchEnd={() => onTap(todo.id)}>
-      <View style={styles.todoItem}>
-        <Text>{todo.title}</Text>
-      </View>
+    <View style={styles.todoItem} onTouchEnd={() => onTap(todo.id)}>
+      <Text>{todo.title}</Text>
     </View>
   );
 
@@ -28,16 +26,13 @@ function TodoItem({todo, onTap}: TodoItemProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: '33.3%',
-    height: '33.3%',
-    padding: 7,
-  },
   todoItem: {
     backgroundColor: 'lightyellow',
+    width: 120,
+    height: 120,
+    padding: 5,
     borderRadius: 4,
     aspectRatio: 1,
-    padding: 5,
   },
 });
 

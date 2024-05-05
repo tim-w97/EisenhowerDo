@@ -46,10 +46,10 @@ function MyTodosScreen({navigation}: Props) {
 const styles = StyleSheet.create({
   safeArea: {
     ...globalStyles.safeArea,
-    padding: 7,
   },
   todoItems: {
     display: 'flex',
+    gap: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
