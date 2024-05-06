@@ -7,13 +7,15 @@ export const fetchTodos = createAsyncThunk(
   'todos/fetch',
 
   // This function contains async logic of a side effect
-  async () => {
+  async (_, {rejectWithValue, fulfillWithValue}) => {
     const response = await fetch(Config.API_URL);
 
-    // TODO: Check if status isn't ok
+    if (response.status !== 200) {
+      return rejectWithValue(response.statusText);
+    }
 
     const todos: Todo[] = await response.json();
 
-    return todos;
+    return fulfillWithValue(todos);
   },
 );
