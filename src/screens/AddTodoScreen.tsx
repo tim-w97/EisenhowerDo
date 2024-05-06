@@ -8,12 +8,12 @@ import {
   View,
 } from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
-import store from '../redux/store.ts';
 import Todo from '../types/todo.ts';
 import 'react-native-get-random-values';
 import {v4 as generateUUID} from 'uuid';
 import {NavigationProp} from '@react-navigation/native';
 import todosSlice from '../redux/todosSlice.ts';
+import {useDispatch} from 'react-redux';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -25,6 +25,8 @@ type Props = {
 };
 
 function AddTodoScreen({navigation}: Props): React.JSX.Element {
+  const dispatch = useDispatch();
+
   let currentTitle: string = '';
   let currentText: string = '';
 
@@ -60,7 +62,7 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
       isUrgent: false,
     };
 
-    store.dispatch(todosSlice.actions.addTodo(newTodo));
+    dispatch(todosSlice.actions.addTodo(newTodo));
 
     navigation.goBack();
   }

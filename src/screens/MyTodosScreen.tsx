@@ -1,11 +1,12 @@
-import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
-import {useSelector} from 'react-redux';
-import TodosState from '../types/todosState.ts';
+import {useDispatch, useSelector} from 'react-redux';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
+import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
+import selectStatus from '../redux/selectors/selectStatus.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -20,6 +21,8 @@ type Props = {
 
 function MyTodosScreen({navigation}: Props) {
   const todos = useSelector(selectAllTodos());
+  const status = useSelector(selectStatus());
+  const dispatch = useDispatch();
 
   function onAddNewTodo() {
     navigation.navigate('AddTodo');
@@ -29,15 +32,25 @@ function MyTodosScreen({navigation}: Props) {
     navigation.navigate('TodoDetails', {todoID});
   }
 
+  function onLoadTodos() {
+    dispatch(fetchTodos());
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.todoItems}>
-        {todos.map(todo => (
-          <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
-        ))}
-      </View>
-      <View style={styles.button}>
-        <Button title="Neues Todo hinzufügen" onPress={onAddNewTodo} />
+      <View>
+        <Text>{status}</Text>
+        <View style={styles.todoItems}>
+          {todos.map(todo => (
+            <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
+          ))}
+        </View>
+        <View style={styles.button}>
+          <Button title="Neues Todo hinzufügen" onPress={onAddNewTodo} />
+        </View>
+        <View style={styles.button}>
+          <Button title="Todos laden" onPress={onLoadTodos} />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -54,7 +67,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-    padding: 13,
     marginTop: 30,
   },
 });
