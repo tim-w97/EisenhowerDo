@@ -9,6 +9,14 @@ const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
+
+  textInput: {
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: 'lightblue',
+    padding: 15,
+  },
 });
 
 export default globalStyles;
