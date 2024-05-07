@@ -18,8 +18,11 @@ type Props = {
 function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
+  let username: string;
+  let password: string;
+
   function onLogin() {
-    dispatch(login());
+    dispatch(login({username, password}));
     //navigation.navigate('MyTodosScreen');
   }
 
@@ -31,6 +34,7 @@ function LoginScreen({navigation}: Props) {
       <TextInput
         placeholder={'Benutzername'}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
+        onChangeText={text => (username = text)}
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
         Passwort
@@ -39,6 +43,7 @@ function LoginScreen({navigation}: Props) {
         secureTextEntry={true}
         placeholder={'Passwort'}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
+        onChangeText={text => (password = text)}
       />
       <Button title={'Einloggen'} onPress={onLogin} />
     </SafeAreaView>
