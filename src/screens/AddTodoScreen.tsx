@@ -12,7 +12,7 @@ import Todo from '../types/todo.ts';
 import 'react-native-get-random-values';
 import {v4 as generateUUID} from 'uuid';
 import {NavigationProp} from '@react-navigation/native';
-import todosSlice from '../redux/todosSlice.ts';
+import todosSlice from '../redux/slices/todosSlice.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 
 type StackParamList = {

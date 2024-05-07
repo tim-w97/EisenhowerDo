@@ -1,9 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 //import initialTodos from '../sampleData/initialTodos.ts';
-import TodosState from '../types/todosState.ts';
-import addTodo from './reducers/addTodo.ts';
-import setTodoCompleted from './reducers/setTodoCompleted.ts';
-import {fetchTodos} from './thunks/fetchTodos.ts';
+import TodosState from '../../types/todosState.ts';
+import addTodo from '../reducers/addTodo.ts';
+import setTodoCompleted from '../reducers/setTodoCompleted.ts';
+import {fetchTodos} from '../thunks/fetchTodos.ts';
 
 const todosSlice = createSlice({
   name: 'todos',
