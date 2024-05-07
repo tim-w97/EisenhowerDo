@@ -2,6 +2,8 @@ import React from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
+import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import {login} from '../redux/thunks/login.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -14,8 +16,11 @@ type Props = {
 };
 
 function LoginScreen({navigation}: Props) {
+  const dispatch = useAppDispatch();
+
   function onLogin() {
-    navigation.navigate('MyTodosScreen');
+    dispatch(login());
+    //navigation.navigate('MyTodosScreen');
   }
 
   return (
