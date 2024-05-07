@@ -4,8 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddTodoScreen from './screens/AddTodoScreen.tsx';
 import {Provider} from 'react-redux';
-import store from './redux/store.ts';
 import TodoDetailsScreen from './screens/TodoDetailsScreen.tsx';
+import {store} from './redux/store.ts';
 
 const Stack = createNativeStackNavigator();
 

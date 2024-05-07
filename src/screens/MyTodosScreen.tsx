@@ -3,10 +3,11 @@ import React from 'react';
 import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
-import {useDispatch, useSelector} from 'react-redux';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
 import selectStatus from '../redux/selectors/selectStatus.ts';
+import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -20,9 +21,10 @@ type Props = {
 };
 
 function MyTodosScreen({navigation}: Props) {
-  const todos = useSelector(selectAllTodos());
-  const status = useSelector(selectStatus());
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  const todos = useAppSelector(selectAllTodos());
+  const status = useAppSelector(selectStatus());
 
   function onAddNewTodo() {
     navigation.navigate('AddTodo');

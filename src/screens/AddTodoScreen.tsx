@@ -13,7 +13,7 @@ import 'react-native-get-random-values';
 import {v4 as generateUUID} from 'uuid';
 import {NavigationProp} from '@react-navigation/native';
 import todosSlice from '../redux/todosSlice.ts';
-import {useDispatch} from 'react-redux';
+import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -25,7 +25,7 @@ type Props = {
 };
 
 function AddTodoScreen({navigation}: Props): React.JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   let currentTitle: string = '';
   let currentText: string = '';
