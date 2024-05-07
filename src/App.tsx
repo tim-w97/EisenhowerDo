@@ -6,18 +6,17 @@ import AddTodoScreen from './screens/AddTodoScreen.tsx';
 import {Provider} from 'react-redux';
 import TodoDetailsScreen from './screens/TodoDetailsScreen.tsx';
 import {store} from './redux/store.ts';
+import {RootStackParamList} from './types/rootStackParamList.ts';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
-  // TODO: use enums for route names
-
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="MyTodos">
+        <Stack.Navigator initialRouteName="MyTodosScreen">
           <Stack.Screen
-            name="MyTodos"
+            name="MyTodosScreen"
             component={MyTodosScreen}
             options={{title: 'Meine Todos'}}
           />
@@ -28,7 +27,6 @@ function App(): React.JSX.Element {
           />
           <Stack.Screen
             name="TodoDetails"
-            // TODO: fix this typing error
             component={TodoDetailsScreen}
             options={{title: 'Details zu Todo'}}
           />
