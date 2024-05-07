@@ -1,8 +1,23 @@
 import React from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
+import {NavigationProp} from '@react-navigation/native';
 
-function LoginScreen() {
+type StackParamList = {
+  // undefined means that this screen doesn't receive any params
+  LoginScreen: undefined;
+  MyTodosScreen: undefined;
+};
+
+type Props = {
+  navigation: NavigationProp<StackParamList>;
+};
+
+function LoginScreen({navigation}: Props) {
+  function onLogin() {
+    navigation.navigate('MyTodosScreen');
+  }
+
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
@@ -20,7 +35,7 @@ function LoginScreen() {
         placeholder={'Passwort'}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
       />
-      <Button title={'Einloggen'} />
+      <Button title={'Einloggen'} onPress={onLogin} />
     </SafeAreaView>
   );
 }
