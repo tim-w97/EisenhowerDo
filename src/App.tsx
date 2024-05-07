@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import TodoDetailsScreen from './screens/TodoDetailsScreen.tsx';
 import {store} from './redux/store.ts';
 import {RootStackParamList} from './types/rootStackParamList.ts';
+import LoginScreen from './screens/LoginScreen.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -14,7 +15,12 @@ function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="MyTodosScreen">
+        <Stack.Navigator initialRouteName="LoginScreen">
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{title: 'Einloggen'}}
+          />
           <Stack.Screen
             name="MyTodosScreen"
             component={MyTodosScreen}
