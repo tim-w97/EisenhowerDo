@@ -1,3 +1,4 @@
+import React from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 
