@@ -1,9 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
-//import initialTodos from '../sampleData/initialTodos.ts';
 import TodosState from '../../types/todosState.ts';
-import addTodo from '../reducers/addTodo.ts';
-import setTodoCompleted from '../reducers/setTodoCompleted.ts';
 import {fetchTodos} from '../thunks/fetchTodos.ts';
+import {addTodo} from '../thunks/addTodo.ts';
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -12,11 +10,9 @@ const todosSlice = createSlice({
     status: 'idle',
     error: null,
   } as TodosState,
-  reducers: {
-    addTodo,
-    setTodoCompleted,
-  },
+  reducers: {},
   extraReducers: builder => {
+    // Fetch Todos
     builder.addCase(fetchTodos.pending, state => {
       // change status to loading and clear previous errors
       state.status = 'loading';
@@ -33,6 +29,22 @@ const todosSlice = createSlice({
         state.status = 'idle';
         state.error = action.payload as string;
       }
+    });
+
+    // Add a new Todo
+    builder.addCase(addTodo.pending, state => {
+      state.status = 'loading';
+      state.error = null;
+    });
+
+    builder.addCase(addTodo.fulfilled, state => {
+      state.status = 'idle';
+      state.error = null;
+    });
+
+    builder.addCase(addTodo.rejected, (state, action) => {
+      state.status = 'idle';
+      state.error = action.payload as string;
     });
   },
 });
