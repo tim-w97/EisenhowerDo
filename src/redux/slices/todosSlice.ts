@@ -25,7 +25,7 @@ const todosSlice = createSlice({
 
     builder.addCase(fetchTodos.fulfilled, (state, action) => {
       state.status = 'idle';
-      state.todos.push(...action.payload);
+      state.todos = action.payload;
     });
 
     builder.addCase(fetchTodos.rejected, (state, action) => {
