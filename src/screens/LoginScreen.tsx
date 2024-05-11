@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import {NavigationProp, StackActions} from '@react-navigation/native';
@@ -6,6 +6,7 @@ import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {login} from '../redux/thunks/login.ts';
 import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
 import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
+import selectToken from '../redux/selectors/selectToken.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -20,18 +21,20 @@ type Props = {
 function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectUserStatus());
+  const token = useAppSelector(selectToken());
 
-  let username: string;
-  let password: string;
-
-  async function onLogin() {
-    const result = await dispatch(login({username, password}));
-    const token = result.payload;
-
+  useEffect(() => {
     // if there is a token, the user is logged in
     if (token) {
       navigation.dispatch(StackActions.replace('MyTodosScreen'));
     }
+  }, [navigation, token]);
+
+  let username: string;
+  let password: string;
+
+  function onLogin() {
+    dispatch(login({username, password}));
   }
 
   return (
