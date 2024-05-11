@@ -11,10 +11,10 @@ export const fetchTodos = createAsyncThunk(
   async (_, thunkAPI) => {
     const url = `${Config.API_URL}/todos`;
 
-    const state = thunkAPI.getState() as RootState;
+    const {user} = thunkAPI.getState() as RootState;
 
     const headers = {
-      Authorization: `Bearer ${state.user.token}`,
+      Authorization: `Bearer ${user.token}`,
     };
 
     const response = await fetch(url, {headers});
