@@ -1,13 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import Config from 'react-native-config';
-import {DtoLogin} from '../../types/dtos/dtoLogin.ts';
+import {CredentialsDTO} from '../../types/dtos/credentialsDTO.ts';
 
 export const login = createAsyncThunk(
   // This argument is the action name
   'user/login',
 
   // This function contains async logic of a side effect
-  async (credentials: DtoLogin, thunkAPI) => {
+  async (credentials: CredentialsDTO, thunkAPI) => {
     const url = `${Config.API_URL}/login`;
 
     const response = await fetch(url, {
