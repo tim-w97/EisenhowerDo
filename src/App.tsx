@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
   return (
+    // TODO: add a welcome screen / splash screen, explaining how the app works
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="LoginScreen">
