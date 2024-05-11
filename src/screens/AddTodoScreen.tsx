@@ -9,6 +9,7 @@ import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {TodoDTO} from '../types/dtos/todoDTO.ts';
+import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -72,6 +73,7 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
     };
 
     await dispatch(addTodo(newTodo));
+    await dispatch(fetchTodos());
 
     navigation.goBack();
   }
