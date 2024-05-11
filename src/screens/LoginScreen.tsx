@@ -1,7 +1,7 @@
 import React from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp, StackActions} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {login} from '../redux/thunks/login.ts';
 import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
@@ -30,7 +30,7 @@ function LoginScreen({navigation}: Props) {
 
     // if there is a token, the user is logged in
     if (token) {
-      navigation.navigate('MyTodosScreen');
+      navigation.dispatch(StackActions.replace('MyTodosScreen'));
     }
   }
 
