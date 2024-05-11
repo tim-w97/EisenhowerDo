@@ -14,8 +14,8 @@ type Todo = {
   // is this Todo urgent?
   isUrgent: boolean;
 
-  // is this Todo completed?
-  isCompleted: boolean;
+  // category of the Todo
+  categoryID: number;
 };
 
 export default Todo;

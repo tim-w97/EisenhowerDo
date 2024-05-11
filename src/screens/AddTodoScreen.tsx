@@ -68,9 +68,9 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
       id: generateUUID(),
       title: currentTitle,
       text: currentText,
-      isCompleted: false,
       isImportant: false,
       isUrgent: false,
+      categoryID: 1,
     };
 
     await dispatch(addTodo(newTodo));
