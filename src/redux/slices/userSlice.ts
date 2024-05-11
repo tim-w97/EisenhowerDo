@@ -21,14 +21,15 @@ const userSlice = createSlice({
     });
 
     builder.addCase(login.fulfilled, (state, action) => {
-      state.token = action.payload;
       state.status = 'idle';
+      state.token = action.payload;
     });
 
     builder.addCase(login.rejected, (state, action) => {
+      state.status = 'idle';
+
       if (action.payload) {
         state.error = action.payload as string;
-        state.status = 'idle';
       }
     });
   },

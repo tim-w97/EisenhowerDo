@@ -4,6 +4,9 @@ import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {login} from '../redux/thunks/login.ts';
+import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
+import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
+import selectToken from '../redux/selectors/selectToken.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -17,6 +20,8 @@ type Props = {
 
 function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
+  const token = useAppSelector(selectToken());
+  const status = useAppSelector(selectUserStatus());
 
   let username: string;
   let password: string;
@@ -28,6 +33,7 @@ function LoginScreen({navigation}: Props) {
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>
+      <Text>{status}</Text>
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
         Benutzername
       </Text>

@@ -5,7 +5,7 @@ import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
-import selectStatus from '../redux/selectors/selectStatus.ts';
+import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
 
@@ -24,7 +24,7 @@ function MyTodosScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
   const todos = useAppSelector(selectAllTodos());
-  const status = useAppSelector(selectStatus());
+  const status = useAppSelector(selectTodoStatus());
 
   function onAddNewTodo() {
     navigation.navigate('AddTodo');

@@ -24,14 +24,14 @@ const todosSlice = createSlice({
     });
 
     builder.addCase(fetchTodos.fulfilled, (state, action) => {
-      state.todos.push(...action.payload);
       state.status = 'idle';
+      state.todos.push(...action.payload);
     });
 
     builder.addCase(fetchTodos.rejected, (state, action) => {
       if (action.payload) {
-        state.error = action.payload as string;
         state.status = 'idle';
+        state.error = action.payload as string;
       }
     });
   },
