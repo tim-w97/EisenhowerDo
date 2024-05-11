@@ -1,5 +1,6 @@
-import TodosState from '../../types/todosState.ts';
+import {RootState} from '../types/rootState.ts';
 
 export default function (todoID: string) {
-  return (state: TodosState) => state.todos.find(todo => todo.id === todoID);
+  return (state: RootState) =>
+    state.todos.todos.find(todo => todo.id === todoID);
 }
