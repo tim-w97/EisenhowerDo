@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import Todo from '../types/todo.ts';
 import 'react-native-get-random-values';
@@ -32,25 +25,27 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>
-      <Text style={[globalStyles.bigTitle, styles.bigBottomMargin]}>
-        Füge ein neues Todo hinzu
+      <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
+        Titel
       </Text>
 
-      <View style={styles.bigBottomMargin}>
-        <TextInput
-          style={[globalStyles.textInput, styles.bigBottomMargin]}
-          placeholder="Titel"
-          onChangeText={text => (currentTitle = text)}
-        />
-        <TextInput
-          style={globalStyles.textInput}
-          multiline={true}
-          textAlignVertical="top"
-          numberOfLines={5}
-          placeholder="Text"
-          onChangeText={text => (currentText = text)}
-        />
-      </View>
+      <TextInput
+        style={[globalStyles.textInput, styles.bigBottomMargin]}
+        placeholder="Titel"
+        onChangeText={text => (currentTitle = text)}
+      />
+      <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
+        Beschreibung
+      </Text>
+
+      <TextInput
+        style={[globalStyles.textInput, styles.bigBottomMargin]}
+        multiline={true}
+        textAlignVertical="top"
+        numberOfLines={5}
+        placeholder="Beschreibung"
+        onChangeText={text => (currentText = text)}
+      />
       <Button title="Todo hinzufügen" onPress={onAddTodo} />
     </SafeAreaView>
   );
@@ -72,8 +67,11 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  bigBottomMargin: {
+  smallBottomMargin: {
     marginBottom: 20,
+  },
+  bigBottomMargin: {
+    marginBottom: 50,
   },
 });
 

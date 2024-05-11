@@ -1,4 +1,4 @@
-import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
@@ -8,6 +8,7 @@ import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
+import LoadingScreen from './LoadingScreen.tsx';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -38,10 +39,13 @@ function MyTodosScreen({navigation}: Props) {
     navigation.navigate('TodoDetails', {todoID});
   }
 
+  if (status === 'loading') {
+    return <LoadingScreen />;
+  }
+
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={globalStyles.safeArea}>
       <View>
-        <Text>{status}</Text>
         <View style={styles.todoItems}>
           {todos.map(todo => (
             <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
@@ -56,9 +60,6 @@ function MyTodosScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    ...globalStyles.safeArea,
-  },
   todoItems: {
     display: 'flex',
     gap: 20,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-    marginTop: 30,
+    marginTop: 50,
   },
 });
 

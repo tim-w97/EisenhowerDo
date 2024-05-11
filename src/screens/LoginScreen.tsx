@@ -68,10 +68,10 @@ function LoginScreen({navigation}: Props) {
 
 const styles = StyleSheet.create({
   smallBottomMargin: {
-    marginBottom: 10,
+    marginBottom: 20,
   },
   bigBottomMargin: {
-    marginBottom: 20,
+    marginBottom: 50,
   },
 });
 
