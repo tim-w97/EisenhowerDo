@@ -8,6 +8,7 @@ import TodoDetailsScreen from './screens/TodoDetailsScreen.tsx';
 import {store} from './redux/store.ts';
 import {RootStackParamList} from './types/rootStackParamList.ts';
 import LoginScreen from './screens/LoginScreen.tsx';
+import LogOutButton from './views/LogOutButton.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,7 +25,10 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="MyTodosScreen"
             component={MyTodosScreen}
-            options={{title: 'Meine Todos'}}
+            options={{
+              title: 'Meine Todos',
+              headerRight: LogOutButton,
+            }}
           />
           <Stack.Screen
             name="AddTodo"
