@@ -51,6 +51,11 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
   );
 
   function onAddTodo() {
+    if (currentTitle.trim() === '' || currentText.trim() === '') {
+      // TODO: show snackbar or something
+      return;
+    }
+
     const newTodo: Todo = {
       id: generateUUID(),
       title: currentTitle,
