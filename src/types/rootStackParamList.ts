@@ -3,5 +3,5 @@ export type RootStackParamList = {
   AddTodo: undefined;
   LoginScreen: undefined;
   MyTodosScreen: undefined;
-  TodoDetails: {todoID: string};
+  TodoDetails: {todoID: number};
 };

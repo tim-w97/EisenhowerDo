@@ -4,7 +4,7 @@ import React from 'react';
 
 type TodoItemProps = {
   todo: Todo;
-  onTap: (todoID: string) => void;
+  onTap: (todoID: number) => void;
 };
 
 function TodoItem({todo, onTap}: TodoItemProps) {

@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
 
 type StackParamList = {
-  TodoDetails: {todoID: string};
+  TodoDetails: {todoID: number};
 };
 
 type Props = {

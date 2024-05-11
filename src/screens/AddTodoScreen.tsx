@@ -1,15 +1,14 @@
 import React from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
-import Todo from '../types/todo.ts';
 import 'react-native-get-random-values';
-import {v4 as generateUUID} from 'uuid';
 import {NavigationProp} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {addTodo} from '../redux/thunks/addTodo.ts';
 import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
+import {TodoDTO} from '../types/dtos/todoDTO.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -64,8 +63,7 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    const newTodo: Todo = {
-      id: generateUUID(),
+    const newTodo: TodoDTO = {
       title: currentTitle,
       text: currentText,
       isImportant: false,

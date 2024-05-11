@@ -14,7 +14,7 @@ type StackParamList = {
   // undefined means that this screen doesn't receive any params
   AddTodo: undefined;
 
-  TodoDetails: {todoID: string};
+  TodoDetails: {todoID: number};
 };
 
 type Props = {
@@ -35,7 +35,7 @@ function MyTodosScreen({navigation}: Props) {
     navigation.navigate('AddTodo');
   }
 
-  function onTodoItemTapped(todoID: string) {
+  function onTodoItemTapped(todoID: number) {
     navigation.navigate('TodoDetails', {todoID});
   }
 

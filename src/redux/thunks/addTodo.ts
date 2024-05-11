@@ -1,14 +1,14 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import Config from 'react-native-config';
 import {RootState} from '../types/rootState.ts';
-import Todo from '../../types/todo.ts';
+import {TodoDTO} from '../../types/dtos/todoDTO.ts';
 
 export const addTodo = createAsyncThunk(
   // This argument is the action name
   'todos/add',
 
   // This function contains async logic of a side effect
-  async (todo: Todo, thunkAPI) => {
+  async (todo: TodoDTO, thunkAPI) => {
     const url = `${Config.API_URL}/todos`;
 
     const {user} = thunkAPI.getState() as RootState;
