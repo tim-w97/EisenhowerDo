@@ -32,18 +32,21 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>
-      <Text style={[globalStyles.bigTitle, styles.title]}>
+      <Text style={[globalStyles.bigTitle, styles.bigBottomMargin]}>
         Füge ein neues Todo hinzu
       </Text>
 
-      <View style={styles.inputFields}>
+      <View style={styles.bigBottomMargin}>
         <TextInput
+          style={[globalStyles.textInput, styles.bigBottomMargin]}
           placeholder="Titel"
           onChangeText={text => (currentTitle = text)}
         />
         <TextInput
+          style={globalStyles.textInput}
           multiline={true}
-          numberOfLines={3}
+          textAlignVertical="top"
+          numberOfLines={5}
           placeholder="Text"
           onChangeText={text => (currentText = text)}
         />
@@ -69,11 +72,8 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    marginBottom: 10,
-  },
-  inputFields: {
-    marginBottom: 50,
+  bigBottomMargin: {
+    marginBottom: 20,
   },
 });
 
