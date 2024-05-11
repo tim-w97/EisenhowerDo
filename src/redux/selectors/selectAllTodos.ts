@@ -1,5 +1,5 @@
-import TodosState from '../../types/todosState.ts';
+import {RootState} from '../types/rootState.ts';
 
 export default function () {
-  return (state: TodosState) => state.todos;
+  return (state: RootState) => state.todos.todos;
 }
