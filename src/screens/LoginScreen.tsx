@@ -7,6 +7,7 @@ import {login} from '../redux/thunks/login.ts';
 import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
 import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
 import selectToken from '../redux/selectors/selectToken.ts';
+import LoadingScreen from './LoadingScreen.tsx';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -35,6 +36,10 @@ function LoginScreen({navigation}: Props) {
 
   function onLogin() {
     dispatch(login({username, password}));
+  }
+
+  if (status === 'loading') {
+    return <LoadingScreen />;
   }
 
   return (
