@@ -44,7 +44,6 @@ function LoginScreen({navigation}: Props) {
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>
-      <Text>{status}</Text>
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
         Benutzername
       </Text>
