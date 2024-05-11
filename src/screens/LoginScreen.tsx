@@ -6,7 +6,6 @@ import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {login} from '../redux/thunks/login.ts';
 import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
 import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
-import selectToken from '../redux/selectors/selectToken.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -20,15 +19,19 @@ type Props = {
 
 function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
-  const token = useAppSelector(selectToken());
   const status = useAppSelector(selectUserStatus());
 
   let username: string;
   let password: string;
 
-  function onLogin() {
-    dispatch(login({username, password}));
-    //navigation.navigate('MyTodosScreen');
+  async function onLogin() {
+    const result = await dispatch(login({username, password}));
+    const token = result.payload;
+
+    // if there is a token, the user is logged in
+    if (token) {
+      navigation.navigate('MyTodosScreen');
+    }
   }
 
   return (
