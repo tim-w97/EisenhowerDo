@@ -1,5 +1,5 @@
 import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
@@ -26,16 +26,16 @@ function MyTodosScreen({navigation}: Props) {
   const todos = useAppSelector(selectAllTodos());
   const status = useAppSelector(selectTodoStatus());
 
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
+
   function onAddNewTodo() {
     navigation.navigate('AddTodo');
   }
 
   function onTodoItemTapped(todoID: string) {
     navigation.navigate('TodoDetails', {todoID});
-  }
-
-  function onLoadTodos() {
-    dispatch(fetchTodos());
   }
 
   return (
@@ -49,9 +49,6 @@ function MyTodosScreen({navigation}: Props) {
         </View>
         <View style={styles.button}>
           <Button title="Neues Todo hinzufügen" onPress={onAddNewTodo} />
-        </View>
-        <View style={styles.button}>
-          <Button title="Todos laden" onPress={onLoadTodos} />
         </View>
       </View>
     </SafeAreaView>
