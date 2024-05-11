@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import Todo from '../../types/todo.ts';
 import Config from 'react-native-config';
+import {RootState} from '../types/rootState.ts';
 
 export const fetchTodos = createAsyncThunk(
   // This argument is the action name
@@ -10,8 +11,13 @@ export const fetchTodos = createAsyncThunk(
   async (_, thunkAPI) => {
     const url = `${Config.API_URL}/todos`;
 
-    // TODO: need auth first
-    const response = await fetch(url);
+    const state = thunkAPI.getState() as RootState;
+
+    const headers = {
+      Authorization: `Bearer ${state.user.token}`,
+    };
+
+    const response = await fetch(url, {headers});
 
     if (response.status !== 200) {
       return thunkAPI.rejectWithValue(response.statusText);
