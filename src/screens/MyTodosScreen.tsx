@@ -1,7 +1,7 @@
-import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
-import {NavigationProp, useFocusEffect} from '@react-navigation/native';
+import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
@@ -48,13 +48,18 @@ function MyTodosScreen({navigation}: Props) {
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <View>
-        <View style={styles.todoItems}>
-          {todos.map(todo => (
-            <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
-          ))}
-        </View>
+        {todos.length === 0 ? (
+          <Text style={globalStyles.bigTitle}>Du hast keine Todos.</Text>
+        ) : (
+          <View style={styles.todoItems}>
+            {todos.map(todo => (
+              <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
+            ))}
+          </View>
+        )}
+
         <View style={styles.button}>
-          <Button title="Neues Todo hinzufügen" onPress={onAddNewTodo} />
+          <Button title="Neues Todo" onPress={onAddNewTodo} />
         </View>
       </View>
     </SafeAreaView>
