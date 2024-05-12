@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {
-  Alert,
   Button,
   SafeAreaView,
   StyleSheet,
@@ -13,7 +12,7 @@ import {NavigationProp, StackActions} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import login from '../redux/thunks/login.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
-import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
+import selectLoginStatus from '../redux/selectors/selectLoginStatus.ts';
 import selectToken from '../redux/selectors/selectToken.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import register from '../redux/thunks/register.ts';
@@ -31,7 +30,7 @@ type Props = {
 
 export default function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
-  const status = useAppSelector(selectUserStatus());
+  const status = useAppSelector(selectLoginStatus());
   const token = useAppSelector(selectToken());
 
   useEffect(() => {
