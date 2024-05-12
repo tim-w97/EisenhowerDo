@@ -84,6 +84,9 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       categoryID: 1,
     };
 
+    title = '';
+    text = '';
+
     await dispatch(addTodo(newTodo));
 
     navigation.goBack();

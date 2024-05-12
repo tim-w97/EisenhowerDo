@@ -42,6 +42,9 @@ export default function LoginScreen({navigation}: Props) {
   useEffect(() => {
     // if there is a token, the user is logged in
     if (token) {
+      username = '';
+      password = '';
+
       navigation.dispatch(StackActions.replace('MyTodosScreen'));
     }
   }, [navigation, token]);
