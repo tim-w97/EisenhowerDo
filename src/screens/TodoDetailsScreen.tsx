@@ -4,6 +4,10 @@ import React from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
+import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import {deleteTodo} from '../redux/thunks/deleteTodo.ts';
+import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
+import * as assert from 'node:assert';
 
 type StackParamList = {
   TodoDetails: {todoID: number};
@@ -15,17 +19,23 @@ type Props = {
 };
 
 function TodoDetailsScreen({route, navigation}: Props) {
+  const dispatch = useAppDispatch();
   const todo = useSelector(selectSingleTodo(route.params.todoID));
 
   let currentTitle: string = '';
   let currentText: string = '';
 
   if (!todo) {
-    throw new Error("Todo with id ${route.params.todoID} doesn't exist.");
+    throw new Error(`Todo with id ${route.params.todoID} doesn't exist.`);
   }
 
-  function onComplete() {
-    // TODO: Send a DELETE request to the server
+  async function onComplete() {
+    if (!todo?.id) {
+      return;
+    }
+
+    await dispatch(deleteTodo(todo.id));
+    await dispatch(fetchTodos());
 
     navigation.goBack();
   }

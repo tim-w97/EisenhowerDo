@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import TodosState from '../../types/todosState.ts';
 import {fetchTodos} from '../thunks/fetchTodos.ts';
 import {addTodo} from '../thunks/addTodo.ts';
+import {deleteTodo} from '../thunks/deleteTodo.ts';
 
 const todosSlice = createSlice({
   name: 'todos',
@@ -43,6 +44,22 @@ const todosSlice = createSlice({
     });
 
     builder.addCase(addTodo.rejected, (state, action) => {
+      state.status = 'idle';
+      state.error = action.payload as string;
+    });
+
+    // Delete a Todo
+    builder.addCase(deleteTodo.pending, state => {
+      state.status = 'loading';
+      state.error = null;
+    });
+
+    builder.addCase(deleteTodo.fulfilled, state => {
+      state.status = 'idle';
+      state.error = null;
+    });
+
+    builder.addCase(deleteTodo.rejected, (state, action) => {
       state.status = 'idle';
       state.error = action.payload as string;
     });
