@@ -1,5 +1,13 @@
 import React from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Switch,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import 'react-native-get-random-values';
 import {NavigationProp} from '@react-navigation/native';
@@ -10,6 +18,7 @@ import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {TodoDTO} from '../types/dtos/todoDTO.ts';
 import Snackbar from 'react-native-snackbar';
+import Checkbox from '../views/Checkbox.tsx';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -55,6 +64,15 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         placeholder="Beschreibung"
         onChangeText={newText => (text = newText)}
       />
+
+      <View style={[styles.checkboxes, styles.bigBottomMargin]}>
+        <Checkbox
+          style={styles.smallBottomMargin}
+          title="Ist wichtig"
+          onToggle={() => {}}
+        />
+        <Checkbox title="Ist dringend" onToggle={() => {}} />
+      </View>
       <Button title="Todo hinzufügen" onPress={onAddTodo} />
     </SafeAreaView>
   );
@@ -98,6 +116,11 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  checkboxes: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
   smallBottomMargin: {
     marginBottom: 20,
   },
