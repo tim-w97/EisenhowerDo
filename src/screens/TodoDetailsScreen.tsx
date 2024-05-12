@@ -30,7 +30,7 @@ export default function TodoDetailsScreen({route, navigation}: Props) {
 
   async function onComplete() {
     if (!todo?.id) {
-      return;
+      throw new Error('Todo has no ID');
     }
 
     await dispatch(deleteTodo(todo.id));
