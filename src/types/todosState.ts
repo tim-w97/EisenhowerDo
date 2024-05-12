@@ -1,9 +1,7 @@
-import Todo from './todo.ts';
+import {Todo} from './todo.ts';
 
-type TodosState = {
+export type TodosState = {
   todos: Todo[];
   status: 'loading' | 'idle';
   error: string | null;
 };
-
-export default TodosState;

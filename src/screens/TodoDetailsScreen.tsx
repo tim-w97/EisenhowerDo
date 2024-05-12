@@ -5,9 +5,7 @@ import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
-import {deleteTodo} from '../redux/thunks/deleteTodo.ts';
-import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
-import * as assert from 'node:assert';
+import deleteTodo from '../redux/thunks/deleteTodo.ts';
 
 type StackParamList = {
   TodoDetails: {todoID: number};
@@ -18,7 +16,7 @@ type Props = {
   route: RouteProp<StackParamList>;
 };
 
-function TodoDetailsScreen({route, navigation}: Props) {
+export default function TodoDetailsScreen({route, navigation}: Props) {
   const dispatch = useAppDispatch();
   const todo = useSelector(selectSingleTodo(route.params.todoID));
 
@@ -91,5 +89,3 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
 });
-
-export default TodoDetailsScreen;

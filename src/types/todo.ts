@@ -1,4 +1,4 @@
-type Todo = {
+export type Todo = {
   // ID of the Todo
   id: number;
 
@@ -17,5 +17,3 @@ type Todo = {
   // category of the Todo
   categoryID: number;
 };
-
-export default Todo;

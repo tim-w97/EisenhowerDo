@@ -1,5 +1,5 @@
-import UserState from '../../types/userState.ts';
-import TodosState from '../../types/todosState.ts';
+import {UserState} from '../../types/userState.ts';
+import {TodosState} from '../../types/todosState.ts';
 import {PayloadAction} from '@reduxjs/toolkit';
 
 export default function errorReducer(

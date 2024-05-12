@@ -1,4 +1,4 @@
-import UserState from '../../types/userState.ts';
+import {UserState} from '../../types/userState.ts';
 
 export default function logout(state: UserState) {
   state.token = null;

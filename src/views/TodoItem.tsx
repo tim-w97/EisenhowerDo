@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import Todo from '../types/todo.ts';
+import {Todo} from '../types/todo.ts';
 import React from 'react';
 
 type TodoItemProps = {
@@ -7,7 +7,7 @@ type TodoItemProps = {
   onTap: (todoID: number) => void;
 };
 
-function TodoItem({todo, onTap}: TodoItemProps) {
+export default function TodoItem({todo, onTap}: TodoItemProps) {
   return (
     <View style={styles.todoItem} onTouchEnd={() => onTap(todo.id)}>
       <Text>{todo.title}</Text>
@@ -35,5 +35,3 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
 });
-
-export default TodoItem;

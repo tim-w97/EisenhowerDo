@@ -3,8 +3,8 @@ import globalStyles from '../styles/globalStyles.ts';
 import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import {NavigationProp, StackActions} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
-import {login} from '../redux/thunks/login.ts';
-import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
+import login from '../redux/thunks/login.ts';
+import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
 import selectToken from '../redux/selectors/selectToken.ts';
 import LoadingScreen from './LoadingScreen.tsx';
@@ -19,7 +19,7 @@ type Props = {
   navigation: NavigationProp<StackParamList>;
 };
 
-function LoginScreen({navigation}: Props) {
+export default function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectUserStatus());
   const token = useAppSelector(selectToken());
@@ -74,5 +74,3 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
 });
-
-export default LoginScreen;

@@ -4,12 +4,11 @@ import globalStyles from '../styles/globalStyles.ts';
 import 'react-native-get-random-values';
 import {NavigationProp} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
-import {addTodo} from '../redux/thunks/addTodo.ts';
-import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
+import addTodo from '../redux/thunks/addTodo.ts';
+import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {TodoDTO} from '../types/dtos/todoDTO.ts';
-import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -20,7 +19,7 @@ type Props = {
   navigation: NavigationProp<StackParamList>;
 };
 
-function AddTodoScreen({navigation}: Props): React.JSX.Element {
+export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectTodoStatus());
 
@@ -86,5 +85,3 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
 });
-
-export default AddTodoScreen;

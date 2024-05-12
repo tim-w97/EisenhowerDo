@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const globalStyles = StyleSheet.create({
+export default StyleSheet.create({
   safeArea: {
     padding: 20,
   },
@@ -23,5 +23,3 @@ const globalStyles = StyleSheet.create({
     color: 'blue',
   },
 });
-
-export default globalStyles;

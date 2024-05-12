@@ -4,11 +4,12 @@ import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
-import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
+import fetchTodos from '../redux/thunks/fetchTodos.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
-import {useAppSelector} from '../redux/hooks/useAppSelector.ts';
+import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import LoadingScreen from './LoadingScreen.tsx';
+import {Todo} from '../types/todo.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -21,7 +22,7 @@ type Props = {
   navigation: NavigationProp<StackParamList>;
 };
 
-function MyTodosScreen({navigation}: Props) {
+export default function MyTodosScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
   const todos = useAppSelector(selectAllTodos());
@@ -52,7 +53,7 @@ function MyTodosScreen({navigation}: Props) {
           <Text style={globalStyles.bigTitle}>Du hast keine Todos.</Text>
         ) : (
           <View style={styles.todoItems}>
-            {todos.map(todo => (
+            {todos.map((todo: Todo) => (
               <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
             ))}
           </View>
@@ -77,5 +78,3 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
 });
-
-export default MyTodosScreen;

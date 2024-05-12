@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import Config from 'react-native-config';
 import {CredentialsDTO} from '../../types/dtos/credentialsDTO.ts';
 
-export const login = createAsyncThunk(
+export default createAsyncThunk(
   // This argument is the action name
   'user/register',
 

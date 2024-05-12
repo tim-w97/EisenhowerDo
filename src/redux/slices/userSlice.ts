@@ -1,11 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
-import UserState from '../../types/userState.ts';
+import {UserState} from '../../types/userState.ts';
 import logout from '../reducers/logout.ts';
-import {login} from '../thunks/login.ts';
+import login from '../thunks/login.ts';
 import pendingReducer from '../reducers/pendingReducer.ts';
 import errorReducer from '../reducers/errorReducer.ts';
 
-const userSlice = createSlice({
+export default createSlice({
   name: 'user',
   initialState: {
     token: null,
@@ -29,5 +29,3 @@ const userSlice = createSlice({
     });
   },
 });
-
-export default userSlice;

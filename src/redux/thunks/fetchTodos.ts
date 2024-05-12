@@ -1,9 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import Todo from '../../types/todo.ts';
+import {Todo} from '../../types/todo.ts';
 import Config from 'react-native-config';
 import {RootState} from '../types/rootState.ts';
 
-export const fetchTodos = createAsyncThunk(
+export default createAsyncThunk(
   // This argument is the action name
   'todos/fetch',
 

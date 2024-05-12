@@ -1,12 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
-import TodosState from '../../types/todosState.ts';
-import {fetchTodos} from '../thunks/fetchTodos.ts';
-import {addTodo} from '../thunks/addTodo.ts';
-import {deleteTodo} from '../thunks/deleteTodo.ts';
+import {TodosState} from '../../types/todosState.ts';
+import fetchTodos from '../thunks/fetchTodos.ts';
+import addTodo from '../thunks/addTodo.ts';
+import deleteTodo from '../thunks/deleteTodo.ts';
 import pendingReducer from '../reducers/pendingReducer.ts';
 import errorReducer from '../reducers/errorReducer.ts';
 
-const todosSlice = createSlice({
+export default createSlice({
   name: 'todos',
   initialState: {
     todos: [],
@@ -42,5 +42,3 @@ const todosSlice = createSlice({
     });
   },
 });
-
-export default todosSlice;

@@ -2,7 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import Config from 'react-native-config';
 import {RootState} from '../types/rootState.ts';
 
-export const addTodo = createAsyncThunk(
+export default createAsyncThunk(
   // This argument is the action name
   'todos/share',
 

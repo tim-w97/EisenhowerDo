@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddTodoScreen from './screens/AddTodoScreen.tsx';
 import {Provider} from 'react-redux';
 import TodoDetailsScreen from './screens/TodoDetailsScreen.tsx';
-import {store} from './redux/store.ts';
+import store from './redux/store.ts';
 import {RootStackParamList} from './types/rootStackParamList.ts';
 import LoginScreen from './screens/LoginScreen.tsx';
 import LogOutButton from './views/LogOutButton.tsx';
@@ -13,7 +13,7 @@ import EditTodoButton from './views/EditTodoButton.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function App(): React.JSX.Element {
+export default function App(): React.JSX.Element {
   return (
     // TODO: add a welcome screen / splash screen, explaining how the app works
     <Provider store={store}>
@@ -47,5 +47,3 @@ function App(): React.JSX.Element {
     </Provider>
   );
 }
-
-export default App;
