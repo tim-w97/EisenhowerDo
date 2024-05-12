@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
+import Snackbar from 'react-native-snackbar';
 
 type StackParamList = {
   TodoDetails: {todoID: number};
@@ -35,6 +36,10 @@ export default function TodoDetailsScreen({route, navigation}: Props) {
     await dispatch(deleteTodo(todo.id));
 
     navigation.goBack();
+
+    Snackbar.show({
+      text: 'Todo ist erledigt',
+    });
   }
 
   return (
@@ -72,7 +77,7 @@ export default function TodoDetailsScreen({route, navigation}: Props) {
         placeholder="Beschreibung"
         onChangeText={text => (currentText = text)}
       />
-      <Button title="Fertig" onPress={onComplete} />
+      <Button title="Habe ich erledigt" onPress={onComplete} />
     </SafeAreaView>
   );
 }
