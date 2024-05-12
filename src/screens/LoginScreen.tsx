@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {
+  Alert,
   Button,
   SafeAreaView,
   StyleSheet,
@@ -39,14 +40,40 @@ export default function LoginScreen({navigation}: Props) {
     }
   }, [navigation, token]);
 
-  let username: string;
-  let password: string;
+  let username = '';
+  let password = '';
+
+  function checkForEmptyValues(): boolean {
+    if (username === '') {
+      Alert.alert('Kein Benutzername', 'Bitte gebe einen Benutzernamen ein');
+      return false;
+    }
+
+    if (password === '') {
+      Alert.alert('Kein Passwort', 'Bitte gebe ein Passwort ein');
+      return false;
+    }
+
+    return true;
+  }
 
   function onRegister() {
+    const valuesAreValid = checkForEmptyValues();
+
+    if (!valuesAreValid) {
+      return;
+    }
+
     dispatch(register({username, password}));
   }
 
   function onLogin() {
+    const valuesAreValid = checkForEmptyValues();
+
+    if (!valuesAreValid) {
+      return;
+    }
+
     dispatch(login({username, password}));
   }
 
