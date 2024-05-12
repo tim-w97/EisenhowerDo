@@ -17,6 +17,7 @@ import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
 import selectToken from '../redux/selectors/selectToken.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import register from '../redux/thunks/register.ts';
+import Snackbar from 'react-native-snackbar';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -45,12 +46,18 @@ export default function LoginScreen({navigation}: Props) {
 
   function checkForEmptyValues(): boolean {
     if (username === '') {
-      Alert.alert('Kein Benutzername', 'Bitte gebe einen Benutzernamen ein');
+      Snackbar.show({
+        text: 'Bitte gebe einen Benutzernamen ein',
+      });
+
       return false;
     }
 
     if (password === '') {
-      Alert.alert('Kein Passwort', 'Bitte gebe ein Passwort ein');
+      Snackbar.show({
+        text: 'Bitte gebe ein Passwort ein',
+      });
+
       return false;
     }
 
