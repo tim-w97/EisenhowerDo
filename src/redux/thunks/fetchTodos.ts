@@ -20,7 +20,8 @@ export default createAsyncThunk(
     const response = await fetch(url, {headers});
 
     if (response.status !== 200) {
-      return thunkAPI.rejectWithValue(response.statusText);
+      const {message} = await response.json();
+      return thunkAPI.rejectWithValue(message);
     }
 
     const todos: Todo[] = await response.json();

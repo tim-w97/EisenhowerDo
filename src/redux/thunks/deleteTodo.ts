@@ -22,7 +22,8 @@ export default createAsyncThunk(
     });
 
     if (response.status !== 200) {
-      return thunkAPI.rejectWithValue(response.statusText);
+      const {message} = await response.json();
+      return thunkAPI.rejectWithValue(message);
     }
   },
 );

@@ -16,11 +16,11 @@ export default createAsyncThunk(
     });
 
     if (response.status !== 201) {
-      return thunkAPI.rejectWithValue(response.statusText);
+      const {message} = await response.json();
+      return thunkAPI.rejectWithValue(message);
     }
 
     const {token} = await response.json();
-
     return token;
   },
 );

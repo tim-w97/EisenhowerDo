@@ -17,6 +17,7 @@ import selectToken from '../redux/selectors/selectToken.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import register from '../redux/thunks/register.ts';
 import Snackbar from 'react-native-snackbar';
+import selectLoginError from '../redux/selectors/selectLoginError.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -32,6 +33,7 @@ export default function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectLoginStatus());
   const token = useAppSelector(selectToken());
+  const error = useAppSelector(selectLoginError());
 
   useEffect(() => {
     // if there is a token, the user is logged in
@@ -39,6 +41,16 @@ export default function LoginScreen({navigation}: Props) {
       navigation.dispatch(StackActions.replace('MyTodosScreen'));
     }
   }, [navigation, token]);
+
+  useEffect(() => {
+    if (!error) {
+      return;
+    }
+
+    Snackbar.show({
+      text: error,
+    });
+  }, [error]);
 
   let username = '';
   let password = '';
