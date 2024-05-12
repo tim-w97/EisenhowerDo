@@ -73,7 +73,6 @@ function AddTodoScreen({navigation}: Props): React.JSX.Element {
     };
 
     await dispatch(addTodo(newTodo));
-    await dispatch(fetchTodos());
 
     navigation.goBack();
   }

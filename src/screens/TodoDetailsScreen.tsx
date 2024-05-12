@@ -35,7 +35,6 @@ function TodoDetailsScreen({route, navigation}: Props) {
     }
 
     await dispatch(deleteTodo(todo.id));
-    await dispatch(fetchTodos());
 
     navigation.goBack();
   }

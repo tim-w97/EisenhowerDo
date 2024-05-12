@@ -1,7 +1,7 @@
 import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 import {fetchTodos} from '../redux/thunks/fetchTodos.ts';
@@ -28,8 +28,10 @@ function MyTodosScreen({navigation}: Props) {
   const status = useAppSelector(selectTodoStatus());
 
   useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
+    navigation.addListener('focus', () => {
+      dispatch(fetchTodos());
+    });
+  }, [dispatch, navigation]);
 
   function onAddNewTodo() {
     navigation.navigate('AddTodo');
