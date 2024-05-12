@@ -9,6 +9,7 @@ import {store} from './redux/store.ts';
 import {RootStackParamList} from './types/rootStackParamList.ts';
 import LoginScreen from './screens/LoginScreen.tsx';
 import LogOutButton from './views/LogOutButton.tsx';
+import EditTodoButton from './views/EditTodoButton.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -39,7 +40,7 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="TodoDetails"
             component={TodoDetailsScreen}
-            options={{title: 'Details zu Todo'}}
+            options={{title: 'Details zu Todo', headerRight: EditTodoButton}}
           />
         </Stack.Navigator>
       </NavigationContainer>
