@@ -20,12 +20,13 @@ type Props = {
   navigation: NavigationProp<StackParamList>;
 };
 
+// Temporary data like this doesn't need to be inside the Redux store
+let currentTitle: string = '';
+let currentText: string = '';
+
 export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectTodoStatus());
-
-  let currentTitle: string = '';
-  let currentText: string = '';
 
   if (status === 'loading') {
     return <LoadingScreen />;
