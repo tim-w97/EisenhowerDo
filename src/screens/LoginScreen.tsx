@@ -1,6 +1,13 @@
 import React, {useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
-import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import {NavigationProp, StackActions} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import login from '../redux/thunks/login.ts';
@@ -34,6 +41,8 @@ export default function LoginScreen({navigation}: Props) {
   let username: string;
   let password: string;
 
+  function onRegister() {}
+
   function onLogin() {
     dispatch(login({username, password}));
   }
@@ -61,12 +70,19 @@ export default function LoginScreen({navigation}: Props) {
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         onChangeText={text => (password = text)}
       />
-      <Button title={'Einloggen'} onPress={onLogin} />
+      <View style={styles.loginButtons}>
+        <Button title={'Registrieren'} onPress={onRegister} color={'blue'} />
+        <Button title={'Einloggen'} onPress={onLogin} />
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  loginButtons: {
+    display: 'flex',
+    gap: 20,
+  },
   smallBottomMargin: {
     marginBottom: 20,
   },
