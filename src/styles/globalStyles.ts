@@ -17,6 +17,11 @@ const globalStyles = StyleSheet.create({
     borderColor: 'lightblue',
     padding: 15,
   },
+
+  actionButton: {
+    padding: 10,
+    color: 'blue',
+  },
 });
 
 export default globalStyles;
