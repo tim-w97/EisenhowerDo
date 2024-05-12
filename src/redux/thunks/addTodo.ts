@@ -23,7 +23,7 @@ export default createAsyncThunk(
       body: JSON.stringify(todo),
     });
 
-    if (response.status !== 200) {
+    if (response.status !== 201) {
       return thunkAPI.rejectWithValue(response.statusText);
     }
 
