@@ -21,8 +21,8 @@ type Props = {
 };
 
 // Temporary data like this doesn't need to be inside the Redux store
-let currentTitle: string = '';
-let currentText: string = '';
+let title: string = '';
+let text: string = '';
 
 export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
@@ -41,7 +41,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       <TextInput
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
-        onChangeText={text => (currentTitle = text)}
+        onChangeText={newTitle => (title = newTitle)}
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
         Beschreibung
@@ -53,21 +53,32 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         textAlignVertical="top"
         numberOfLines={5}
         placeholder="Beschreibung"
-        onChangeText={text => (currentText = text)}
+        onChangeText={newText => (text = newText)}
       />
       <Button title="Todo hinzufügen" onPress={onAddTodo} />
     </SafeAreaView>
   );
 
   async function onAddTodo() {
-    if (currentTitle.trim() === '' || currentText.trim() === '') {
-      // TODO: show snackbar or something
+    if (title.trim() === '') {
+      Snackbar.show({
+        text: 'Bitte gebe einen Titel ein',
+      });
+
+      return;
+    }
+
+    if (text.trim() === '') {
+      Snackbar.show({
+        text: 'Bitte gebe eine Beschreibung ein',
+      });
+
       return;
     }
 
     const newTodo: TodoDTO = {
-      title: currentTitle,
-      text: currentText,
+      title,
+      text,
       isImportant: false,
       isUrgent: false,
       categoryID: 1,

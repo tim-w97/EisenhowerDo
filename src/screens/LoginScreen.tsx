@@ -30,8 +30,8 @@ type Props = {
 };
 
 // Temporary data like this doesn't need to be inside the Redux store
-let username = '';
-let password = '';
+let username: string = '';
+let password: string = '';
 
 export default function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
@@ -57,7 +57,7 @@ export default function LoginScreen({navigation}: Props) {
   }, [error]);
 
   function checkForEmptyValues(): boolean {
-    if (username === '') {
+    if (username.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe einen Benutzernamen ein',
       });
@@ -65,7 +65,7 @@ export default function LoginScreen({navigation}: Props) {
       return false;
     }
 
-    if (password === '') {
+    if (password.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe ein Passwort ein',
       });
