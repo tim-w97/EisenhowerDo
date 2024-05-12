@@ -15,6 +15,7 @@ import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectUserStatus from '../redux/selectors/selectUserStatus.ts';
 import selectToken from '../redux/selectors/selectToken.ts';
 import LoadingScreen from './LoadingScreen.tsx';
+import register from '../redux/thunks/register.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -41,7 +42,9 @@ export default function LoginScreen({navigation}: Props) {
   let username: string;
   let password: string;
 
-  function onRegister() {}
+  function onRegister() {
+    dispatch(register({username, password}));
+  }
 
   function onLogin() {
     dispatch(login({username, password}));
