@@ -9,6 +9,7 @@ import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {TodoDTO} from '../types/dtos/todoDTO.ts';
+import Snackbar from 'react-native-snackbar';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -74,6 +75,10 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
     await dispatch(addTodo(newTodo));
 
     navigation.goBack();
+
+    Snackbar.show({
+      text: 'Todo wurde hinzugefügt',
+    });
   }
 }
 
