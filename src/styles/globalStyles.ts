@@ -11,8 +11,7 @@ export default StyleSheet.create({
   },
 
   textInput: {
-    borderStyle: 'solid',
-    borderWidth: 2,
+    borderWidth: 5,
     borderRadius: 5,
     borderColor: 'lightblue',
     padding: 15,
