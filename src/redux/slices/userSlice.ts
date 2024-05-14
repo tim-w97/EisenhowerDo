@@ -5,6 +5,8 @@ import login from '../thunks/login.ts';
 import pendingReducer from '../reducers/pendingReducer.ts';
 import errorReducer from '../reducers/errorReducer.ts';
 import register from '../thunks/register.ts';
+import clearCredentials from '../reducers/clearCredentials.ts';
+import setCredentials from '../reducers/setCredentials.ts';
 
 export default createSlice({
   name: 'user',
@@ -18,6 +20,8 @@ export default createSlice({
     status: 'idle',
   } as UserState,
   reducers: {
+    setCredentials,
+    clearCredentials,
     logout,
   },
   extraReducers: builder => {

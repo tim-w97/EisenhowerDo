@@ -49,11 +49,9 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       <TextInput
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
-        onChangeText={title => {
-          dispatch(
-            todosSlice.actions.setTemporaryData({...temporaryData, title}),
-          );
-        }}
+        onChangeText={title =>
+          dispatch(todosSlice.actions.setTodoData({...temporaryData, title}))
+        }
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
         Beschreibung
@@ -65,11 +63,9 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         textAlignVertical="top"
         numberOfLines={5}
         placeholder="Beschreibung"
-        onChangeText={text => {
-          dispatch(
-            todosSlice.actions.setTemporaryData({...temporaryData, text}),
-          );
-        }}
+        onChangeText={text =>
+          dispatch(todosSlice.actions.setTodoData({...temporaryData, text}))
+        }
       />
 
       <View style={[styles.checkboxes, styles.bigBottomMargin]}>
@@ -77,26 +73,26 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
           style={styles.smallBottomMargin}
           title="Ist wichtig"
           isChecked={temporaryData.isImportant}
-          onToggle={() => {
+          onToggle={() =>
             dispatch(
-              todosSlice.actions.setTemporaryData({
+              todosSlice.actions.setTodoData({
                 ...temporaryData,
                 isImportant: !temporaryData.isImportant,
               }),
-            );
-          }}
+            )
+          }
         />
         <Checkbox
           title="Ist dringend"
           isChecked={temporaryData.isUrgent}
-          onToggle={() => {
+          onToggle={() =>
             dispatch(
-              todosSlice.actions.setTemporaryData({
+              todosSlice.actions.setTodoData({
                 ...temporaryData,
                 isUrgent: !temporaryData.isUrgent,
               }),
-            );
-          }}
+            )
+          }
         />
       </View>
       <Button title="Todo hinzufügen" onPress={onAddTodo} />
@@ -128,7 +124,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       categoryID: 1,
     };
 
-    dispatch(todosSlice.actions.clearTemporaryData());
+    dispatch(todosSlice.actions.clearTodoData());
     await dispatch(addTodo(newTodo));
 
     navigation.goBack();

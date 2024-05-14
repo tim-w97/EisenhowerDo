@@ -18,6 +18,8 @@ import selectToken from '../redux/selectors/selectToken.ts';
 import register from '../redux/thunks/register.ts';
 import Snackbar from 'react-native-snackbar';
 import selectLoginError from '../redux/selectors/selectLoginError.ts';
+import selectCredentials from '../redux/selectors/selectCredentials.ts';
+import userSlice from '../redux/slices/userSlice.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -29,25 +31,21 @@ type Props = {
   navigation: NavigationProp<StackParamList>;
 };
 
-// Temporary data like this doesn't need to be inside the Redux store
-let username: string = '';
-let password: string = '';
-
 export default function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectLoginStatus());
+
+  const credentials = useAppSelector(selectCredentials());
   const token = useAppSelector(selectToken());
   const error = useAppSelector(selectLoginError());
 
   useEffect(() => {
     // if there is a token, the user is logged in
     if (token) {
-      username = '';
-      password = '';
-
+      dispatch(userSlice.actions.clearCredentials());
       navigation.dispatch(StackActions.replace('MyTodosScreen'));
     }
-  }, [navigation, token]);
+  }, [dispatch, navigation, token]);
 
   useEffect(() => {
     if (!error) {
@@ -60,7 +58,7 @@ export default function LoginScreen({navigation}: Props) {
   }, [error]);
 
   function checkForEmptyValues(): boolean {
-    if (username.trim() === '') {
+    if (credentials.username.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe einen Benutzernamen ein',
       });
@@ -68,7 +66,7 @@ export default function LoginScreen({navigation}: Props) {
       return false;
     }
 
-    if (password.trim() === '') {
+    if (credentials.password.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe ein Passwort ein',
       });
@@ -86,7 +84,7 @@ export default function LoginScreen({navigation}: Props) {
       return;
     }
 
-    dispatch(register({username, password}));
+    dispatch(register(credentials));
   }
 
   function onLogin() {
@@ -96,7 +94,7 @@ export default function LoginScreen({navigation}: Props) {
       return;
     }
 
-    dispatch(login({username, password}));
+    dispatch(login(credentials));
   }
 
   return (
@@ -107,7 +105,9 @@ export default function LoginScreen({navigation}: Props) {
       <TextInput
         placeholder={'Benutzername'}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
-        onChangeText={text => (username = text)}
+        onChangeText={username =>
+          dispatch(userSlice.actions.setCredentials({...credentials, username}))
+        }
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
         Passwort
@@ -116,7 +116,9 @@ export default function LoginScreen({navigation}: Props) {
         secureTextEntry={true}
         placeholder={'Passwort'}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
-        onChangeText={text => (password = text)}
+        onChangeText={password =>
+          dispatch(userSlice.actions.setCredentials({...credentials, password}))
+        }
       />
       {status === 'loading' ? (
         <ActivityIndicator size="large" />
