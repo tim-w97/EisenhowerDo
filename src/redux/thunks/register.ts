@@ -10,17 +10,22 @@ export default createAsyncThunk(
   async (credentials: CredentialsDTO, thunkAPI) => {
     const url = `${Config.API_URL}/register`;
 
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-    });
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(credentials),
+      });
 
-    if (response.status !== 201) {
-      const {message} = await response.json();
-      return thunkAPI.rejectWithValue(message);
+      if (response.status !== 201) {
+        const {message} = await response.json();
+        return thunkAPI.rejectWithValue(message);
+      }
+
+      const {token} = await response.json();
+      return token;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue('Ein Netzwerkfehler ist aufgetreten');
     }
-
-    const {token} = await response.json();
-    return token;
   },
 );

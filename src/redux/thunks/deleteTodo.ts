@@ -17,14 +17,19 @@ export default createAsyncThunk(
       return thunkAPI.rejectWithValue('Kein Token vorhanden');
     }
 
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: createAuthorizationHeader(token),
-    });
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: createAuthorizationHeader(token),
+      });
 
-    if (response.status !== 200) {
-      const {message} = await response.json();
-      return thunkAPI.rejectWithValue(message);
+      if (response.status !== 200) {
+        const {message} = await response.json();
+        return thunkAPI.rejectWithValue(message);
+      }
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue('Ein Netzwerkfehler ist aufgetreten');
     }
   },
 );
