@@ -9,6 +9,8 @@ import register from '../thunks/register.ts';
 export default createSlice({
   name: 'user',
   initialState: {
+    username: '',
+    password: '',
     token: null,
     error: null,
     status: 'idle',

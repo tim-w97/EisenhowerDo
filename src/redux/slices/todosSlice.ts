@@ -12,6 +12,12 @@ export default createSlice({
     todos: [],
     status: 'idle',
     error: null,
+    temporaryData: {
+      title: '',
+      text: '',
+      isImportant: false,
+      isUrgent: false,
+    },
   } as TodosState,
   reducers: {},
   extraReducers: builder => {
