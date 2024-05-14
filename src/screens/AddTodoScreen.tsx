@@ -19,6 +19,7 @@ import {TodoDTO} from '../types/dtos/todoDTO.ts';
 import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
+import selectTodoData from '../redux/selectors/selectTodoData.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -33,7 +34,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const status = useAppSelector(selectTodoStatus());
-  const temporaryData = useAppSelector(state => state.todos.temporaryData);
+  const temporaryData = useAppSelector(selectTodoData());
 
   if (status === 'loading') {
     return <LoadingScreen />;
