@@ -1,6 +1,7 @@
+import {CredentialsDTO} from './dtos/credentialsDTO.ts';
+
 export type UserState = {
-  username: string;
-  password: string;
+  credentials: CredentialsDTO;
 
   token: string | null;
   status: 'loading' | 'idle';

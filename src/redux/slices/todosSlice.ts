@@ -19,6 +19,7 @@ export default createSlice({
       text: '',
       isImportant: false,
       isUrgent: false,
+      categoryID: 1,
     },
   } as TodosState,
   reducers: {
