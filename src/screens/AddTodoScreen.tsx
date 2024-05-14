@@ -15,7 +15,6 @@ import addTodo from '../redux/thunks/addTodo.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
-import {TodoDTO} from '../types/dtos/todoDTO.ts';
 import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
@@ -34,7 +33,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const status = useAppSelector(selectTodoStatus());
-  const temporaryData = useAppSelector(selectTodoData());
+  const todoData = useAppSelector(selectTodoData());
 
   if (status === 'loading') {
     return <LoadingScreen />;
@@ -50,7 +49,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
-          dispatch(todosSlice.actions.setTodoData({...temporaryData, title}))
+          dispatch(todosSlice.actions.setTodoData({...todoData, title}))
         }
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
@@ -64,7 +63,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         numberOfLines={5}
         placeholder="Beschreibung"
         onChangeText={text =>
-          dispatch(todosSlice.actions.setTodoData({...temporaryData, text}))
+          dispatch(todosSlice.actions.setTodoData({...todoData, text}))
         }
       />
 
@@ -72,24 +71,24 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         <Checkbox
           style={styles.smallBottomMargin}
           title="Ist wichtig"
-          isChecked={temporaryData.isImportant}
+          isChecked={todoData.isImportant}
           onToggle={() =>
             dispatch(
               todosSlice.actions.setTodoData({
-                ...temporaryData,
-                isImportant: !temporaryData.isImportant,
+                ...todoData,
+                isImportant: !todoData.isImportant,
               }),
             )
           }
         />
         <Checkbox
           title="Ist dringend"
-          isChecked={temporaryData.isUrgent}
+          isChecked={todoData.isUrgent}
           onToggle={() =>
             dispatch(
               todosSlice.actions.setTodoData({
-                ...temporaryData,
-                isUrgent: !temporaryData.isUrgent,
+                ...todoData,
+                isUrgent: !todoData.isUrgent,
               }),
             )
           }
@@ -100,7 +99,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   );
 
   async function onAddTodo() {
-    if (temporaryData.title.trim() === '') {
+    if (todoData.title.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe einen Titel ein',
       });
@@ -108,7 +107,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    if (temporaryData.text.trim() === '') {
+    if (todoData.text.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe eine Beschreibung ein',
       });
@@ -116,16 +115,8 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    const newTodo: TodoDTO = {
-      title: temporaryData.title,
-      text: temporaryData.text,
-      isImportant: temporaryData.isImportant,
-      isUrgent: temporaryData.isUrgent,
-      categoryID: 1,
-    };
-
+    await dispatch(addTodo(todoData));
     dispatch(todosSlice.actions.clearTodoData());
-    await dispatch(addTodo(newTodo));
 
     navigation.goBack();
 
