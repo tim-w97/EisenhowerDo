@@ -19,6 +19,7 @@ import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import selectTodoData from '../redux/selectors/selectTodoData.ts';
+import {Dropdown} from 'react-native-element-dropdown';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -65,6 +66,13 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         onChangeText={text =>
           dispatch(todosSlice.actions.setTodoData({...todoData, text}))
         }
+      />
+
+      <Dropdown
+        data={['test1']}
+        labelField="label"
+        valueField="value"
+        onChange={() => {}}
       />
 
       <View style={[styles.checkboxes, styles.bigBottomMargin]}>
