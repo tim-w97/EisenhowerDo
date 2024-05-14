@@ -2,7 +2,7 @@ import {TodosState} from '../../types/todosState.ts';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {TemporaryData} from '../../types/temporaryData.ts';
 
-export default function (
+export default function setTemporaryData(
   state: TodosState,
   action: PayloadAction<TemporaryData>,
 ) {

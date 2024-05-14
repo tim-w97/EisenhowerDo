@@ -6,17 +6,25 @@ import Icon from 'react-native-vector-icons/Entypo';
 type CheckboxProps = {
   style?: any;
   title: string;
+  isChecked: boolean;
   onToggle: () => void;
 };
 
-export default function Checkbox({style, title, onToggle}: CheckboxProps) {
+export default function Checkbox({
+  style,
+  title,
+  isChecked,
+  onToggle,
+}: CheckboxProps) {
   return (
     <View style={[styles.container, style]} onTouchEnd={onToggle}>
       <Text style={globalStyles.bigTitle}>{title}</Text>
 
       <View style={styles.stackedContainer}>
         <View style={styles.checkbox} />
-        <Icon style={styles.checkIcon} name="check" size={50} />
+        {isChecked ? (
+          <Icon style={styles.checkIcon} name="check" size={50} />
+        ) : null}
       </View>
     </View>
   );
