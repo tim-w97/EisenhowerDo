@@ -3,7 +3,6 @@ import {
   Button,
   SafeAreaView,
   StyleSheet,
-  Switch,
   Text,
   TextInput,
   View,
