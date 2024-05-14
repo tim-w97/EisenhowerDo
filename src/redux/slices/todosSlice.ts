@@ -5,6 +5,7 @@ import addTodo from '../thunks/addTodo.ts';
 import deleteTodo from '../thunks/deleteTodo.ts';
 import pendingReducer from '../reducers/pendingReducer.ts';
 import errorReducer from '../reducers/errorReducer.ts';
+import changeTemporaryData from '../reducers/changeTemporaryData.ts';
 
 export default createSlice({
   name: 'todos',
@@ -19,7 +20,9 @@ export default createSlice({
       isUrgent: false,
     },
   } as TodosState,
-  reducers: {},
+  reducers: {
+    changeTemporaryData,
+  },
   extraReducers: builder => {
     // pending cases
     builder.addCase(fetchTodos.pending, pendingReducer);
