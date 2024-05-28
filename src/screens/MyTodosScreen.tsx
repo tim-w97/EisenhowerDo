@@ -1,4 +1,4 @@
-import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Animated, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
@@ -10,6 +10,7 @@ import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {Todo} from '../types/todo.ts';
+import ScrollView = Animated.ScrollView;
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -47,8 +48,8 @@ export default function MyTodosScreen({navigation}: Props) {
   }
 
   return (
-    <SafeAreaView style={globalStyles.safeArea}>
-      <View>
+    <SafeAreaView style={[globalStyles.safeArea, styles.safeArea]}>
+      <ScrollView>
         {todos.length === 0 ? (
           <Text style={globalStyles.bigTitle}>Du hast keine Todos.</Text>
         ) : (
@@ -58,23 +59,39 @@ export default function MyTodosScreen({navigation}: Props) {
             ))}
           </View>
         )}
-
-        <View style={styles.button}>
-          <Button title="Neues Todo" onPress={onAddNewTodo} />
-        </View>
+      </ScrollView>
+      <View style={styles.buttonContainer} onTouchEnd={onAddNewTodo}>
+        <Text style={styles.buttonText}>Neues Todo</Text>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    padding: 0,
+  },
   todoItems: {
     display: 'flex',
     gap: 20,
+    padding: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginBottom: 90,
   },
-  button: {
-    marginTop: 50,
+  buttonContainer: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    padding: 30,
+    backgroundColor: 'lightblue',
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
