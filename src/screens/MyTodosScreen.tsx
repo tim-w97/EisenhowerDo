@@ -11,6 +11,7 @@ import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {Todo} from '../types/todo.ts';
 import ScrollView = Animated.ScrollView;
+import FixedBottomButton from '../views/FixedBottomButton.tsx';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -60,9 +61,7 @@ export default function MyTodosScreen({navigation}: Props) {
           </View>
         )}
       </ScrollView>
-      <View style={styles.buttonContainer} onTouchEnd={onAddNewTodo}>
-        <Text style={styles.buttonText}>Neues Todo</Text>
-      </View>
+      <FixedBottomButton text="Neues Todo" onTap={onAddNewTodo} />
     </SafeAreaView>
   );
 }
@@ -78,20 +77,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginBottom: 90,
-  },
-  buttonContainer: {
-    position: 'absolute',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    padding: 30,
-    backgroundColor: 'lightblue',
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
   },
 });
