@@ -114,6 +114,7 @@ export default function LoginScreen({navigation}: Props) {
         Passwort
       </Text>
       <TextInput
+        placeholder={'Passwort'}
         secureTextEntry={true}
         value={credentials.password}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
