@@ -12,8 +12,9 @@ export default createSlice({
   name: 'user',
   initialState: {
     credentials: {
-      username: '',
-      password: '',
+      // credentials for testing
+      username: 'lisa',
+      password: 'check',
     },
     token: null,
     error: null,

@@ -104,6 +104,7 @@ export default function LoginScreen({navigation}: Props) {
       </Text>
       <TextInput
         placeholder={'Benutzername'}
+        value={credentials.username}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         onChangeText={username =>
           dispatch(userSlice.actions.setCredentials({...credentials, username}))
@@ -114,7 +115,7 @@ export default function LoginScreen({navigation}: Props) {
       </Text>
       <TextInput
         secureTextEntry={true}
-        placeholder={'Passwort'}
+        value={credentials.password}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         onChangeText={password =>
           dispatch(userSlice.actions.setCredentials({...credentials, password}))
