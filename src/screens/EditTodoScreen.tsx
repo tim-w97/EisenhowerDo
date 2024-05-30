@@ -139,6 +139,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
 
     Snackbar.show({
       text: 'Todo wurde geändert',
+      marginBottom: 85,
     });
   }
 }

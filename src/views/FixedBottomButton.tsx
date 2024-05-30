@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
   button: {
     width: 300,
     borderRadius: 100,
-    paddingHorizontal: 50,
-    paddingVertical: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
   },
