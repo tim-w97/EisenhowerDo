@@ -51,7 +51,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
-          dispatch(todosSlice.actions.setTodoData({...todoData, title}))
+          dispatch(todosSlice.actions.setTemporaryData({...todoData, title}))
         }
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
@@ -66,7 +66,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
         numberOfLines={5}
         placeholder="Beschreibung"
         onChangeText={text =>
-          dispatch(todosSlice.actions.setTodoData({...todoData, text}))
+          dispatch(todosSlice.actions.setTemporaryData({...todoData, text}))
         }
       />
 
@@ -77,7 +77,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
           isChecked={todoData.isImportant}
           onToggle={() =>
             dispatch(
-              todosSlice.actions.setTodoData({
+              todosSlice.actions.setTemporaryData({
                 ...todoData,
                 isImportant: !todoData.isImportant,
               }),
@@ -89,7 +89,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
           isChecked={todoData.isUrgent}
           onToggle={() =>
             dispatch(
-              todosSlice.actions.setTodoData({
+              todosSlice.actions.setTemporaryData({
                 ...todoData,
                 isUrgent: !todoData.isUrgent,
               }),
@@ -119,7 +119,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
     }
 
     await dispatch(addTodo(todoData));
-    dispatch(todosSlice.actions.clearTodoData());
+    dispatch(todosSlice.actions.clearTemporaryData());
 
     navigation.goBack();
 
