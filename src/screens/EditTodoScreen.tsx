@@ -19,6 +19,9 @@ import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import selectTodoData from '../redux/selectors/selectTodoData.ts';
+import {useSelector} from 'react-redux';
+import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
+import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -34,6 +37,12 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
 
   const status = useAppSelector(selectTodoStatus());
   const todoData = useAppSelector(selectTodoData());
+  const lastTappedTodo = useAppSelector(selectLastTappedTodo());
+  const todo = useSelector(selectSingleTodo(lastTappedTodo));
+
+  if (!todo) {
+    throw new Error(`Todo with id ${lastTappedTodo} doesn't exist.`);
+  }
 
   if (status === 'loading') {
     return <LoadingScreen />;
@@ -47,7 +56,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
 
       {/*TODO: allow submit via keyboard so it hides automatically*/}
       <TextInput
-        value={todoData.title}
+        value={todo.title}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
@@ -59,7 +68,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       </Text>
 
       <TextInput
-        value={todoData.text}
+        value={todo.text}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         multiline={true}
         textAlignVertical="top"

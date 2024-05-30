@@ -12,6 +12,7 @@ import LoadingScreen from './LoadingScreen.tsx';
 import {Todo} from '../types/todo.ts';
 import ScrollView = Animated.ScrollView;
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
+import todosSlice from '../redux/slices/todosSlice.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -41,6 +42,7 @@ export default function MyTodosScreen({navigation}: Props) {
   }
 
   function onTodoItemTapped(todoID: number) {
+    dispatch(todosSlice.actions.setLastTappedTodo(todoID));
     navigation.navigate('TodoDetails', {todoID});
   }
 
