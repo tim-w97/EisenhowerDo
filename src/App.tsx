@@ -10,6 +10,7 @@ import {RootStackParamList} from './types/rootStackParamList.ts';
 import LoginScreen from './screens/LoginScreen.tsx';
 import LogOutButton from './views/LogOutButton.tsx';
 import EditTodoButton from './views/EditTodoButton.tsx';
+import EditTodoScreen from './screens/EditTodoScreen.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,6 +37,11 @@ export default function App(): React.JSX.Element {
             name="AddTodo"
             component={AddTodoScreen}
             options={{title: 'Neues Todo hinzufügen'}}
+          />
+          <Stack.Screen
+            name="EditTodo"
+            component={EditTodoScreen}
+            options={{title: 'Todo ändern'}}
           />
           <Stack.Screen
             name="TodoDetails"
