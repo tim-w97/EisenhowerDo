@@ -9,21 +9,23 @@ type FixedBottomButtonProps = {
 
 export default function FixedBottomButton(props: FixedBottomButtonProps) {
   return (
-    <View
-      style={[
-        styles.buttonContainer,
-        {backgroundColor: props.backgroundColor ?? 'lightblue'},
-      ]}
-      onTouchEnd={props.onTap}>
-      <Text style={styles.buttonText}>{props.text}</Text>
+    <View style={styles.container}>
+      <View
+        style={[
+          styles.button,
+          {backgroundColor: props.backgroundColor ?? 'lightblue'},
+        ]}
+        onTouchEnd={props.onTap}>
+        <Text style={styles.buttonText}>{props.text}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
+  container: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 15,
     left: 0,
     right: 0,
     top: 'auto',
@@ -31,10 +33,16 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 30,
+  },
+  button: {
+    width: 230,
+    borderRadius: 100,
+    paddingHorizontal: 50,
+    paddingVertical: 20,
   },
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
