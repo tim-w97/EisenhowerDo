@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -37,6 +37,10 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
   const temporaryData = useAppSelector(selectTemporaryData());
   const todo = useAppSelector(selectLastTappedTodo());
 
+  useEffect(() => {
+    dispatch(todosSlice.actions.setTemporaryData(todo));
+  }, [dispatch, todo]);
+
   if (status === 'loading') {
     return <LoadingScreen />;
   }
@@ -49,7 +53,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
 
       {/*TODO: allow submit via keyboard so it hides automatically*/}
       <TextInput
-        value={todo.title}
+        defaultValue={temporaryData.title}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
@@ -63,7 +67,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       </Text>
 
       <TextInput
-        value={todo.text}
+        defaultValue={temporaryData.text}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         multiline={true}
         textAlignVertical="top"
