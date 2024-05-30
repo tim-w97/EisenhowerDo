@@ -47,6 +47,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
 
       {/*TODO: allow submit via keyboard so it hides automatically*/}
       <TextInput
+        value={todoData.title}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
@@ -58,6 +59,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       </Text>
 
       <TextInput
+        value={todoData.text}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         multiline={true}
         textAlignVertical="top"
