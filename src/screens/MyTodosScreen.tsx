@@ -1,4 +1,9 @@
-import {Animated, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  ListRenderItemInfo,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
@@ -10,7 +15,6 @@ import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {Todo} from '../types/todo.ts';
-import ScrollView = Animated.ScrollView;
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
 
@@ -50,19 +54,21 @@ export default function MyTodosScreen({navigation}: Props) {
     return <LoadingScreen />;
   }
 
+  function renderTodoItem(itemInfo: ListRenderItemInfo<Todo>) {
+    const todo = itemInfo.item;
+
+    return <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />;
+  }
+
   return (
     <SafeAreaView style={[globalStyles.safeArea, styles.safeArea]}>
-      <ScrollView>
-        {todos.length === 0 ? (
-          <Text style={globalStyles.bigTitle}>Du hast keine Todos.</Text>
-        ) : (
-          <View style={styles.todoItems}>
-            {todos.map((todo: Todo) => (
-              <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />
-            ))}
-          </View>
-        )}
-      </ScrollView>
+      <FlatList
+        data={todos}
+        renderItem={renderTodoItem}
+        keyExtractor={item => item.id.toString()}
+        numColumns={2}
+        contentContainerStyle={styles.listContainer}
+      />
       <FixedBottomButton text="Neues Todo" onTap={onAddNewTodo} />
     </SafeAreaView>
   );
@@ -72,12 +78,8 @@ const styles = StyleSheet.create({
   safeArea: {
     padding: 0,
   },
-  todoItems: {
-    display: 'flex',
-    gap: 20,
-    padding: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 90,
+  listContainer: {
+    padding: 10,
+    paddingBottom: 150,
   },
 });

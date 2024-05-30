@@ -9,29 +9,23 @@ type TodoItemProps = {
 
 export default function TodoItem({todo, onTap}: TodoItemProps) {
   return (
-    <View style={styles.todoItem} onTouchEnd={() => onTap(todo.id)}>
-      <Text>{todo.title}</Text>
+    <View style={styles.container}>
+      <View style={styles.todoItem} onTouchEnd={() => onTap(todo.id)}>
+        <Text>{todo.title}</Text>
+      </View>
     </View>
   );
-
-  // TODO: put that logic inside todo details
-  // function onSetCompleted() {
-  //   const newStatus: TodoStatus = {
-  //     todoID: todo.id,
-  //     isCompleted: !todo.isCompleted,
-  //   };
-  //
-  //   store.dispatch(todosSlice.actions.setTodoCompleted(newStatus));
-  // }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: '50%',
+    padding: 10,
+  },
+
   todoItem: {
     backgroundColor: 'lightyellow',
-    width: 120,
-    height: 120,
-    padding: 5,
-    borderRadius: 4,
+    padding: 10,
     aspectRatio: 1,
   },
 });
