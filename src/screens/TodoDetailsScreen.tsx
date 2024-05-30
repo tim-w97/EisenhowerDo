@@ -7,22 +7,20 @@ import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
 import Snackbar from 'react-native-snackbar';
+import {RootStackParamList} from '../types/rootStackParamList.ts';
 
 type StackParamList = {
   TodoDetails: {todoID: number};
 };
 
 type Props = {
-  navigation: NavigationProp<StackParamList>;
+  navigation: NavigationProp<RootStackParamList>;
   route: RouteProp<StackParamList>;
 };
 
 export default function TodoDetailsScreen({route, navigation}: Props) {
   const dispatch = useAppDispatch();
   const todo = useSelector(selectSingleTodo(route.params.todoID));
-
-  let currentTitle: string = '';
-  let currentText: string = '';
 
   if (!todo) {
     throw new Error(`Todo with id ${route.params.todoID} doesn't exist.`);
@@ -61,7 +59,6 @@ export default function TodoDetailsScreen({route, navigation}: Props) {
           styles.bigBottomMargin,
         ]}
         placeholder="Titel"
-        onChangeText={text => (currentTitle = text)}
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
         Beschreibung
@@ -79,7 +76,6 @@ export default function TodoDetailsScreen({route, navigation}: Props) {
         textAlignVertical="top"
         numberOfLines={5}
         placeholder="Beschreibung"
-        onChangeText={text => (currentText = text)}
       />
       <Button title="Bearbeiten" onPress={onEdit} />
       <Text />
