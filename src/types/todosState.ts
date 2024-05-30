@@ -5,6 +5,7 @@ export type TodosState = {
   todos: Todo[];
   status: 'loading' | 'idle';
   error: string | null;
+  lastTappedTodo: number;
 
   temporaryData: TodoDTO;
 };

@@ -5,8 +5,9 @@ import addTodo from '../thunks/addTodo.ts';
 import deleteTodo from '../thunks/deleteTodo.ts';
 import pendingReducer from '../reducers/pendingReducer.ts';
 import errorReducer from '../reducers/errorReducer.ts';
-import setTodoData from '../reducers/setTodoData.ts';
-import clearTodoData from '../reducers/clearTodoData.ts';
+import setTemporaryData from '../reducers/setTemporaryData.ts';
+import clearTemporaryData from '../reducers/clearTemporaryData.ts';
+import setLastTappedTodo from '../reducers/setLastTappedTodo.ts';
 
 export default createSlice({
   name: 'todos',
@@ -14,6 +15,7 @@ export default createSlice({
     todos: [],
     status: 'idle',
     error: null,
+    lastTappedTodo: 0,
     temporaryData: {
       title: '',
       text: '',
@@ -25,8 +27,9 @@ export default createSlice({
     },
   } as TodosState,
   reducers: {
-    setTodoData,
-    clearTodoData,
+    setLastTappedTodo,
+    setTemporaryData,
+    clearTemporaryData,
   },
   extraReducers: builder => {
     // pending cases
