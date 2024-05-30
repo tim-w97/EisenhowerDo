@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    width: 230,
+    width: 300,
     borderRadius: 100,
     paddingHorizontal: 50,
     paddingVertical: 20,

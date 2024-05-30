@@ -19,6 +19,7 @@ import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import selectTemporaryData from '../redux/selectors/selectTemporaryData.ts';
+import FixedBottomButton from '../views/FixedBottomButton.tsx';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -99,7 +100,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
           }
         />
       </View>
-      <Button title="Todo hinzufügen" onPress={onAddTodo} />
+      <FixedBottomButton text="Todo hinzufügen" onTap={onAddTodo} />
     </SafeAreaView>
   );
 
