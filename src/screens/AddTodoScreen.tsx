@@ -46,7 +46,6 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         Titel
       </Text>
 
-      {/*TODO: allow submit via keyboard so it hides automatically*/}
       <TextInput
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
