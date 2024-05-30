@@ -5,11 +5,12 @@ type FixedBottomButtonProps = {
   text: string;
   onTap: () => void;
   backgroundColor?: string;
+  isTop?: boolean;
 };
 
 export default function FixedBottomButton(props: FixedBottomButtonProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, props.isTop ? styles.topButton : null]}>
       <View
         style={[
           styles.button,
@@ -23,9 +24,13 @@ export default function FixedBottomButton(props: FixedBottomButtonProps) {
 }
 
 const styles = StyleSheet.create({
+  topButton: {
+    bottom: 125,
+  },
+
   container: {
     position: 'absolute',
-    bottom: 15,
+    bottom: 60,
     left: 0,
     right: 0,
     top: 'auto',

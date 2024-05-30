@@ -1,12 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import 'react-native-get-random-values';
 import {NavigationProp} from '@react-navigation/native';
@@ -21,6 +14,7 @@ import selectTemporaryData from '../redux/selectors/selectTemporaryData.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import editTodo from '../redux/thunks/editTodo.ts';
 import {Todo} from '../types/todo.ts';
+import FixedBottomButton from '../views/FixedBottomButton.tsx';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -108,7 +102,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
           }
         />
       </View>
-      <Button title="Todo ändern" onPress={onChangeTodo} />
+      <FixedBottomButton text="Todo ändern" onTap={onChangeTodo} />
     </SafeAreaView>
   );
 
@@ -139,7 +133,6 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
 
     Snackbar.show({
       text: 'Todo wurde geändert',
-      marginBottom: 85,
     });
   }
 }

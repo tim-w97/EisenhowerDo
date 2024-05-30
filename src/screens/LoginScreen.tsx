@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {
   ActivityIndicator,
@@ -20,6 +20,7 @@ import Snackbar from 'react-native-snackbar';
 import selectLoginError from '../redux/selectors/selectLoginError.ts';
 import selectCredentials from '../redux/selectors/selectCredentials.ts';
 import userSlice from '../redux/slices/userSlice.ts';
+import FixedBottomButton from '../views/FixedBottomButton.tsx';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -125,20 +126,16 @@ export default function LoginScreen({navigation}: Props) {
       {status === 'loading' ? (
         <ActivityIndicator size="large" />
       ) : (
-        <View style={styles.loginButtons}>
-          <Button title={'Registrieren'} onPress={onRegister} color={'blue'} />
-          <Button title={'Einloggen'} onPress={onLogin} />
-        </View>
+        <Fragment>
+          <FixedBottomButton text={'Registrieren'} onTap={onRegister} isTop />
+          <FixedBottomButton text={'Einloggen'} onTap={onLogin} />
+        </Fragment>
       )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  loginButtons: {
-    display: 'flex',
-    gap: 20,
-  },
   smallBottomMargin: {
     marginBottom: 20,
   },

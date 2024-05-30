@@ -8,6 +8,7 @@ import deleteTodo from '../redux/thunks/deleteTodo.ts';
 import Snackbar from 'react-native-snackbar';
 import {RootStackParamList} from '../types/rootStackParamList.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
+import FixedBottomButton from '../views/FixedBottomButton.tsx';
 
 type StackParamList = {
   TodoDetails: undefined;
@@ -66,7 +67,7 @@ export default function TodoDetailsScreen({navigation}: Props) {
         numberOfLines={5}
         placeholder="Beschreibung"
       />
-      <Button title="Habe ich erledigt" onPress={onComplete} />
+      <FixedBottomButton text="Habe ich erledigt" onTap={onComplete} />
     </SafeAreaView>
   );
 }

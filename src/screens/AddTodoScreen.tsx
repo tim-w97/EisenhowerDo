@@ -128,7 +128,6 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
 
     Snackbar.show({
       text: 'Todo wurde hinzugefügt',
-      marginBottom: 85,
     });
   }
 }
