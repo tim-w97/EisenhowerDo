@@ -21,9 +21,6 @@ export default createSlice({
       text: '',
       isImportant: false,
       isUrgent: false,
-
-      // TODO: remove category everywhere
-      categoryID: 1,
     },
   } as TodosState,
   reducers: {

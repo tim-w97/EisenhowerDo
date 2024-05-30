@@ -10,7 +10,4 @@ export type TodoDTO = {
 
   // is this Todo urgent?
   isUrgent: boolean;
-
-  // category of the Todo
-  categoryID: number;
 };
