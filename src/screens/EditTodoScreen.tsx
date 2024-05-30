@@ -18,9 +18,7 @@ import LoadingScreen from './LoadingScreen.tsx';
 import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
-import selectTodoData from '../redux/selectors/selectTodoData.ts';
-import {useSelector} from 'react-redux';
-import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
+import selectTemporaryData from '../redux/selectors/selectTemporaryData.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 
 type StackParamList = {
@@ -36,13 +34,8 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const status = useAppSelector(selectTodoStatus());
-  const todoData = useAppSelector(selectTodoData());
-  const lastTappedTodo = useAppSelector(selectLastTappedTodo());
-  const todo = useSelector(selectSingleTodo(lastTappedTodo));
-
-  if (!todo) {
-    throw new Error(`Todo with id ${lastTappedTodo} doesn't exist.`);
-  }
+  const temporaryData = useAppSelector(selectTemporaryData());
+  const todo = useAppSelector(selectLastTappedTodo());
 
   if (status === 'loading') {
     return <LoadingScreen />;
@@ -60,7 +53,9 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
-          dispatch(todosSlice.actions.setTemporaryData({...todoData, title}))
+          dispatch(
+            todosSlice.actions.setTemporaryData({...temporaryData, title}),
+          )
         }
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
@@ -75,7 +70,9 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
         numberOfLines={5}
         placeholder="Beschreibung"
         onChangeText={text =>
-          dispatch(todosSlice.actions.setTemporaryData({...todoData, text}))
+          dispatch(
+            todosSlice.actions.setTemporaryData({...temporaryData, text}),
+          )
         }
       />
 
@@ -83,24 +80,24 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
         <Checkbox
           style={styles.smallBottomMargin}
           title="Ist wichtig"
-          isChecked={todoData.isImportant}
+          isChecked={temporaryData.isImportant}
           onToggle={() =>
             dispatch(
               todosSlice.actions.setTemporaryData({
-                ...todoData,
-                isImportant: !todoData.isImportant,
+                ...temporaryData,
+                isImportant: !temporaryData.isImportant,
               }),
             )
           }
         />
         <Checkbox
           title="Ist dringend"
-          isChecked={todoData.isUrgent}
+          isChecked={temporaryData.isUrgent}
           onToggle={() =>
             dispatch(
               todosSlice.actions.setTemporaryData({
-                ...todoData,
-                isUrgent: !todoData.isUrgent,
+                ...temporaryData,
+                isUrgent: !temporaryData.isUrgent,
               }),
             )
           }
@@ -111,7 +108,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
   );
 
   async function onChangeTodo() {
-    if (todoData.title.trim() === '') {
+    if (temporaryData.title.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe einen Titel ein',
       });
@@ -119,7 +116,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    if (todoData.text.trim() === '') {
+    if (temporaryData.text.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe eine Beschreibung ein',
       });
@@ -127,7 +124,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    await dispatch(addTodo(todoData));
+    await dispatch(addTodo(temporaryData));
     dispatch(todosSlice.actions.clearTemporaryData());
 
     navigation.goBack();

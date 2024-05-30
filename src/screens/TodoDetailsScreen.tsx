@@ -3,7 +3,6 @@ import globalStyles from '../styles/globalStyles.ts';
 import React from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import selectSingleTodo from '../redux/selectors/selectSingleTodo.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
 import Snackbar from 'react-native-snackbar';
@@ -22,18 +21,9 @@ type Props = {
 export default function TodoDetailsScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
-  const lastTappedTodo = useSelector(selectLastTappedTodo());
-  const todo = useSelector(selectSingleTodo(lastTappedTodo));
-
-  if (!todo) {
-    throw new Error(`Todo with id ${lastTappedTodo} doesn't exist.`);
-  }
+  const todo = useSelector(selectLastTappedTodo());
 
   async function onComplete() {
-    if (!todo?.id) {
-      throw new Error('Todo has no ID');
-    }
-
     await dispatch(deleteTodo(todo.id));
 
     navigation.goBack();
