@@ -8,9 +8,10 @@ import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
 import Snackbar from 'react-native-snackbar';
 import {RootStackParamList} from '../types/rootStackParamList.ts';
+import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 
 type StackParamList = {
-  TodoDetails: {todoID: number};
+  TodoDetails: undefined;
 };
 
 type Props = {
@@ -18,12 +19,14 @@ type Props = {
   route: RouteProp<StackParamList>;
 };
 
-export default function TodoDetailsScreen({route, navigation}: Props) {
+export default function TodoDetailsScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
-  const todo = useSelector(selectSingleTodo(route.params.todoID));
+
+  const lastTappedTodo = useSelector(selectLastTappedTodo());
+  const todo = useSelector(selectSingleTodo(lastTappedTodo));
 
   if (!todo) {
-    throw new Error(`Todo with id ${route.params.todoID} doesn't exist.`);
+    throw new Error(`Todo with id ${lastTappedTodo} doesn't exist.`);
   }
 
   async function onComplete() {
