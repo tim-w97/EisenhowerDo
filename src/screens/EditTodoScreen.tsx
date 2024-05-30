@@ -11,7 +11,6 @@ import globalStyles from '../styles/globalStyles.ts';
 import 'react-native-get-random-values';
 import {NavigationProp} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
-import addTodo from '../redux/thunks/addTodo.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
@@ -20,6 +19,8 @@ import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import selectTemporaryData from '../redux/selectors/selectTemporaryData.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
+import editTodo from '../redux/thunks/editTodo.ts';
+import {Todo} from '../types/todo.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -128,9 +129,12 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    await dispatch(addTodo(temporaryData));
+    const updatedTodo: Todo = {...temporaryData, id: todo.id};
+
+    await dispatch(editTodo(updatedTodo));
     dispatch(todosSlice.actions.clearTemporaryData());
 
+    navigation.goBack();
     navigation.goBack();
 
     Snackbar.show({
