@@ -40,10 +40,6 @@ export default function TodoDetailsScreen({route, navigation}: Props) {
     });
   }
 
-  function onEdit() {
-    navigation.navigate('EditTodo');
-  }
-
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
@@ -77,8 +73,6 @@ export default function TodoDetailsScreen({route, navigation}: Props) {
         numberOfLines={5}
         placeholder="Beschreibung"
       />
-      <Button title="Bearbeiten" onPress={onEdit} />
-      <Text />
       <Button title="Habe ich erledigt" onPress={onComplete} />
     </SafeAreaView>
   );

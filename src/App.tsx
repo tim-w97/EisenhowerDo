@@ -12,6 +12,12 @@ import LogOutButton from './views/LogOutButton.tsx';
 import EditTodoButton from './views/EditTodoButton.tsx';
 import EditTodoScreen from './screens/EditTodoScreen.tsx';
 
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App(): React.JSX.Element {
