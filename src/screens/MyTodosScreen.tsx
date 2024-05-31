@@ -17,6 +17,7 @@ import LoadingScreen from './LoadingScreen.tsx';
 import {Todo} from '../types/todo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
+import getSortedTodos from '../utils/getSortedTodos.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -63,7 +64,7 @@ export default function MyTodosScreen({navigation}: Props) {
   return (
     <SafeAreaView style={[globalStyles.safeArea, styles.safeArea]}>
       <FlatList
-        data={todos}
+        data={getSortedTodos(todos)}
         renderItem={renderTodoItem}
         keyExtractor={item => item.id.toString()}
         numColumns={2}
