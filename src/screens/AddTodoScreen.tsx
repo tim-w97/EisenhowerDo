@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import 'react-native-get-random-values';
 import {NavigationProp} from '@react-navigation/native';
@@ -18,7 +11,7 @@ import LoadingScreen from './LoadingScreen.tsx';
 import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
-import selectTemporaryData from '../redux/selectors/selectTemporaryData.ts';
+import selectPendingTodo from '../redux/selectors/selectPendingTodo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 
 type StackParamList = {
@@ -34,7 +27,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const status = useAppSelector(selectTodoStatus());
-  const temporaryData = useAppSelector(selectTemporaryData());
+  const pendingTodo = useAppSelector(selectPendingTodo());
 
   if (status === 'loading') {
     return <LoadingScreen />;
@@ -50,9 +43,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
-          dispatch(
-            todosSlice.actions.setTemporaryData({...temporaryData, title}),
-          )
+          dispatch(todosSlice.actions.setPendingTodo({...pendingTodo, title}))
         }
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
@@ -66,9 +57,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         numberOfLines={5}
         placeholder="Beschreibung"
         onChangeText={text =>
-          dispatch(
-            todosSlice.actions.setTemporaryData({...temporaryData, text}),
-          )
+          dispatch(todosSlice.actions.setPendingTodo({...pendingTodo, text}))
         }
       />
 
@@ -76,24 +65,24 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
         <Checkbox
           style={styles.smallBottomMargin}
           title="Ist wichtig"
-          isChecked={temporaryData.isImportant}
+          isChecked={pendingTodo.isImportant}
           onToggle={() =>
             dispatch(
-              todosSlice.actions.setTemporaryData({
-                ...temporaryData,
-                isImportant: !temporaryData.isImportant,
+              todosSlice.actions.setPendingTodo({
+                ...pendingTodo,
+                isImportant: !pendingTodo.isImportant,
               }),
             )
           }
         />
         <Checkbox
           title="Ist dringend"
-          isChecked={temporaryData.isUrgent}
+          isChecked={pendingTodo.isUrgent}
           onToggle={() =>
             dispatch(
-              todosSlice.actions.setTemporaryData({
-                ...temporaryData,
-                isUrgent: !temporaryData.isUrgent,
+              todosSlice.actions.setPendingTodo({
+                ...pendingTodo,
+                isUrgent: !pendingTodo.isUrgent,
               }),
             )
           }
@@ -104,7 +93,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   );
 
   async function onAddTodo() {
-    if (temporaryData.title.trim() === '') {
+    if (pendingTodo.title.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe einen Titel ein',
       });
@@ -112,7 +101,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    if (temporaryData.text.trim() === '') {
+    if (pendingTodo.text.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe eine Beschreibung ein',
       });
@@ -120,8 +109,8 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    await dispatch(addTodo(temporaryData));
-    dispatch(todosSlice.actions.clearTemporaryData());
+    await dispatch(addTodo(pendingTodo));
+    dispatch(todosSlice.actions.clearPendingTodo());
 
     navigation.goBack();
 

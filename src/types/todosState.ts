@@ -1,5 +1,5 @@
 import {Todo} from './todo.ts';
-import {TodoDTO} from './dtos/todoDTO.ts';
+import {PendingTodo} from './dtos/pendingTodo.ts';
 
 export type TodosState = {
   todos: Todo[];
@@ -7,5 +7,5 @@ export type TodosState = {
   error: string | null;
   lastTappedTodo: number;
 
-  temporaryData: TodoDTO;
+  pendingTodo: PendingTodo;
 };

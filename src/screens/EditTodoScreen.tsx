@@ -10,7 +10,7 @@ import LoadingScreen from './LoadingScreen.tsx';
 import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
-import selectTemporaryData from '../redux/selectors/selectTemporaryData.ts';
+import selectPendingTodo from '../redux/selectors/selectPendingTodo.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import editTodo from '../redux/thunks/editTodo.ts';
 import {Todo} from '../types/todo.ts';
@@ -29,11 +29,11 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const status = useAppSelector(selectTodoStatus());
-  const temporaryData = useAppSelector(selectTemporaryData());
+  const pendingTodo = useAppSelector(selectPendingTodo());
   const todo = useAppSelector(selectLastTappedTodo());
 
   useEffect(() => {
-    dispatch(todosSlice.actions.setTemporaryData(todo));
+    dispatch(todosSlice.actions.setPendingTodo(todo));
   }, [dispatch, todo]);
 
   if (status === 'loading') {
@@ -47,13 +47,11 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       </Text>
 
       <TextInput
-        defaultValue={temporaryData.title}
+        defaultValue={pendingTodo.title}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         placeholder="Titel"
         onChangeText={title =>
-          dispatch(
-            todosSlice.actions.setTemporaryData({...temporaryData, title}),
-          )
+          dispatch(todosSlice.actions.setPendingTodo({...pendingTodo, title}))
         }
       />
       <Text style={[globalStyles.bigTitle, styles.smallBottomMargin]}>
@@ -61,16 +59,14 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       </Text>
 
       <TextInput
-        defaultValue={temporaryData.text}
+        defaultValue={pendingTodo.text}
         style={[globalStyles.textInput, styles.bigBottomMargin]}
         multiline={true}
         textAlignVertical="top"
         numberOfLines={5}
         placeholder="Beschreibung"
         onChangeText={text =>
-          dispatch(
-            todosSlice.actions.setTemporaryData({...temporaryData, text}),
-          )
+          dispatch(todosSlice.actions.setPendingTodo({...pendingTodo, text}))
         }
       />
 
@@ -78,24 +74,24 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
         <Checkbox
           style={styles.smallBottomMargin}
           title="Ist wichtig"
-          isChecked={temporaryData.isImportant}
+          isChecked={pendingTodo.isImportant}
           onToggle={() =>
             dispatch(
-              todosSlice.actions.setTemporaryData({
-                ...temporaryData,
-                isImportant: !temporaryData.isImportant,
+              todosSlice.actions.setPendingTodo({
+                ...pendingTodo,
+                isImportant: !pendingTodo.isImportant,
               }),
             )
           }
         />
         <Checkbox
           title="Ist dringend"
-          isChecked={temporaryData.isUrgent}
+          isChecked={pendingTodo.isUrgent}
           onToggle={() =>
             dispatch(
-              todosSlice.actions.setTemporaryData({
-                ...temporaryData,
-                isUrgent: !temporaryData.isUrgent,
+              todosSlice.actions.setPendingTodo({
+                ...pendingTodo,
+                isUrgent: !pendingTodo.isUrgent,
               }),
             )
           }
@@ -106,7 +102,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
   );
 
   async function onChangeTodo() {
-    if (temporaryData.title.trim() === '') {
+    if (pendingTodo.title.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe einen Titel ein',
       });
@@ -114,7 +110,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    if (temporaryData.text.trim() === '') {
+    if (pendingTodo.text.trim() === '') {
       Snackbar.show({
         text: 'Bitte gebe eine Beschreibung ein',
       });
@@ -122,10 +118,10 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    const updatedTodo: Todo = {...temporaryData, id: todo.id};
+    const updatedTodo: Todo = {...pendingTodo, id: todo.id};
 
     await dispatch(editTodo(updatedTodo));
-    dispatch(todosSlice.actions.clearTemporaryData());
+    dispatch(todosSlice.actions.clearPendingTodo());
 
     navigation.goBack();
     navigation.goBack();

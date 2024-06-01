@@ -1,4 +1,4 @@
-export type TodoDTO = {
+export type PendingTodo = {
   // the title of the Todo
   title: string;
 
