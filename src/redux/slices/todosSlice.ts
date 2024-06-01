@@ -8,6 +8,8 @@ import errorReducer from '../reducers/errorReducer.ts';
 import setPendingTodo from '../reducers/setPendingTodo.ts';
 import clearPendingTodo from '../reducers/clearPendingTodo.ts';
 import setLastTappedTodo from '../reducers/setLastTappedTodo.ts';
+import setUserToShareTodoWith from '../reducers/setUserToShareTodoWith.ts';
+import clearUserToShareTodoWith from '../reducers/clearUserToShareTodoWith.ts';
 
 export default createSlice({
   name: 'todos',
@@ -22,11 +24,14 @@ export default createSlice({
       isImportant: false,
       isUrgent: false,
     },
+    userToShareTodoWith: '',
   } as TodosState,
   reducers: {
     setLastTappedTodo,
     setPendingTodo,
     clearPendingTodo,
+    setUserToShareTodoWith,
+    clearUserToShareTodoWith,
   },
   extraReducers: builder => {
     // pending cases

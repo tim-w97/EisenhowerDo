@@ -6,6 +6,6 @@ export type TodosState = {
   status: 'loading' | 'idle';
   error: string | null;
   lastTappedTodo: number;
-
   pendingTodo: PendingTodo;
+  userToShareTodoWith: string;
 };
