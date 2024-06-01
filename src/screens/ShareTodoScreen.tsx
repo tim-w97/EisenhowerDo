@@ -23,6 +23,14 @@ export default function ShareTodoScreen({navigation}: Props) {
   function onShare() {
     dispatch(todosSlice.actions.clearUserToShareTodoWith());
 
+    if (username === '') {
+      Snackbar.show({
+        text: 'Bitte gib einen Benutzernamen ein',
+      });
+
+      return;
+    }
+
     // Go back to MyTodos
     navigation.goBack();
     navigation.goBack();

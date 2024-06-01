@@ -95,7 +95,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   async function onAddTodo() {
     if (pendingTodo.title.trim() === '') {
       Snackbar.show({
-        text: 'Bitte gebe einen Titel ein',
+        text: 'Bitte gib einen Titel ein',
       });
 
       return;
@@ -103,7 +103,7 @@ export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
 
     if (pendingTodo.text.trim() === '') {
       Snackbar.show({
-        text: 'Bitte gebe eine Beschreibung ein',
+        text: 'Bitte gib eine Beschreibung ein',
       });
 
       return;

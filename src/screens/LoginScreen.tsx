@@ -59,7 +59,7 @@ export default function LoginScreen({navigation}: Props) {
   function checkForEmptyValues(): boolean {
     if (credentials.username.trim() === '') {
       Snackbar.show({
-        text: 'Bitte gebe einen Benutzernamen ein',
+        text: 'Bitte gib einen Benutzernamen ein',
       });
 
       return false;
@@ -67,7 +67,7 @@ export default function LoginScreen({navigation}: Props) {
 
     if (credentials.password.trim() === '') {
       Snackbar.show({
-        text: 'Bitte gebe ein Passwort ein',
+        text: 'Bitte gib ein Passwort ein',
       });
 
       return false;
