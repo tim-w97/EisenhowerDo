@@ -67,7 +67,16 @@ export default function TodoDetailsScreen({navigation}: Props) {
         numberOfLines={5}
         placeholder="Beschreibung"
       />
-      <FixedBottomButton text="Habe ich erledigt" onTap={onComplete} />
+      <FixedBottomButton
+        text="Mit anderem Benutzer teilen"
+        onTap={() => {}}
+        isTop
+      />
+      <FixedBottomButton
+        text="Habe ich erledigt"
+        onTap={onComplete}
+        backgroundColor="lightgreen"
+      />
     </SafeAreaView>
   );
 }

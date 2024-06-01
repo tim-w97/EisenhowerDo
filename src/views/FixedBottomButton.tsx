@@ -25,7 +25,7 @@ export default function FixedBottomButton(props: FixedBottomButtonProps) {
 
 const styles = StyleSheet.create({
   topButton: {
-    bottom: 125,
+    bottom: 130,
   },
 
   container: {
