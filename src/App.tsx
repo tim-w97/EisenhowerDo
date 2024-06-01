@@ -11,6 +11,7 @@ import LoginScreen from './screens/LoginScreen.tsx';
 import LogOutButton from './views/LogOutButton.tsx';
 import EditTodoButton from './views/EditTodoButton.tsx';
 import EditTodoScreen from './screens/EditTodoScreen.tsx';
+import ShareTodoScreen from './screens/ShareTodoScreen.tsx';
 
 declare global {
   namespace ReactNavigation {
@@ -53,6 +54,11 @@ export default function App(): React.JSX.Element {
             name="TodoDetails"
             component={TodoDetailsScreen}
             options={{title: 'Details zu Todo', headerRight: EditTodoButton}}
+          />
+          <Stack.Screen
+            name="ShareTodo"
+            component={ShareTodoScreen}
+            options={{title: 'Mit anderem Benutzer teilen'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

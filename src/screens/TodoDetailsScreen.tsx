@@ -1,4 +1,4 @@
-import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
@@ -32,6 +32,10 @@ export default function TodoDetailsScreen({navigation}: Props) {
     Snackbar.show({
       text: 'Todo ist erledigt',
     });
+  }
+
+  function onShare() {
+    navigation.navigate('ShareTodo');
   }
 
   return (
@@ -69,7 +73,7 @@ export default function TodoDetailsScreen({navigation}: Props) {
       />
       <FixedBottomButton
         text="Mit anderem Benutzer teilen"
-        onTap={() => {}}
+        onTap={onShare}
         isTop
       />
       <FixedBottomButton

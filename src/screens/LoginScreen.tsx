@@ -2,12 +2,10 @@ import React, {Fragment, useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {
   ActivityIndicator,
-  Button,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
-  View,
 } from 'react-native';
 import {NavigationProp, StackActions} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';

@@ -5,4 +5,5 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   MyTodosScreen: undefined;
   TodoDetails: undefined;
+  ShareTodo: undefined;
 };
