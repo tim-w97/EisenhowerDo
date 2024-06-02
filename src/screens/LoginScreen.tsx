@@ -126,11 +126,7 @@ export default function LoginScreen({navigation}: Props) {
       ) : (
         <Fragment>
           <FixedBottomButton text={'Registrieren'} onTap={onRegister} isTop />
-          <FixedBottomButton
-            text={'Einloggen'}
-            onTap={onLogin}
-            backgroundColor="lightgreen"
-          />
+          <FixedBottomButton text={'Einloggen'} onTap={onLogin} />
         </Fragment>
       )}
     </SafeAreaView>

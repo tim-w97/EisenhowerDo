@@ -91,11 +91,7 @@ export default function TodoDetailsScreen({navigation}: Props) {
             onTap={onShare}
             isTop
           />
-          <FixedBottomButton
-            text="Habe ich erledigt"
-            onTap={onComplete}
-            backgroundColor="lightgreen"
-          />
+          <FixedBottomButton text="Habe ich erledigt" onTap={onComplete} />
         </Fragment>
       )}
     </SafeAreaView>

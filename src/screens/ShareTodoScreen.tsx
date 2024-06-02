@@ -81,11 +81,7 @@ export default function ShareTodoScreen({navigation}: Props) {
           dispatch(todosSlice.actions.setUserToShareTodoWith(user))
         }
       />
-      <FixedBottomButton
-        text="Jetzt teilen"
-        onTap={onShare}
-        backgroundColor="lightgreen"
-      />
+      <FixedBottomButton text="Jetzt teilen" onTap={onShare} />
     </SafeAreaView>
   );
 }
