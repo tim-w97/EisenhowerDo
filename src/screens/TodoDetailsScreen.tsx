@@ -1,4 +1,10 @@
-import {SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
+import {
+  Animated,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React, {Fragment} from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
@@ -9,6 +15,8 @@ import {RootStackParamList} from '../types/rootStackParamList.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
+import View = Animated.View;
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type StackParamList = {
   TodoDetails: undefined;
@@ -71,7 +79,12 @@ export default function TodoDetailsScreen({navigation}: Props) {
         numberOfLines={5}
         placeholder="Beschreibung"
       />
-      {todo.isShared ? null : (
+      {todo.isShared ? (
+        <View style={styles.shareInfo}>
+          <Icon name="information-outline" size={30} />
+          <Text>Dieses Todo wurde mit dir geteilt.</Text>
+        </View>
+      ) : (
         <Fragment>
           <FixedBottomButton
             text="Mit anderem Benutzer teilen"
@@ -93,6 +106,12 @@ const styles = StyleSheet.create({
   textInput: {
     borderColor: 'lightgray',
     color: 'black',
+  },
+  shareInfo: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
   },
   smallBottomMargin: {
     marginBottom: 20,
