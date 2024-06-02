@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import colors from '../styles/colors.ts';
 import shadows from '../styles/shadows.ts';
@@ -13,11 +13,11 @@ type FixedBottomButtonProps = {
 export default function FixedBottomButton(props: FixedBottomButtonProps) {
   return (
     <View style={[styles.container, props.isTop ? styles.bottomMargin : null]}>
-      <View
-        style={[styles.button, props.isTop ? styles.topButton : null]}
-        onTouchEnd={props.onTap}>
+      <Pressable
+        onPress={props.onTap}
+        style={[styles.button, props.isTop ? styles.topButton : null]}>
         <Text style={styles.buttonText}>{props.text}</Text>
-      </View>
+      </Pressable>
     </View>
   );
 }

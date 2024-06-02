@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import Icon from 'react-native-vector-icons/Entypo';
 import colors from '../styles/colors.ts';
@@ -18,7 +18,7 @@ export default function Checkbox({
   onToggle,
 }: CheckboxProps) {
   return (
-    <View style={[styles.container, style]} onTouchEnd={onToggle}>
+    <Pressable style={[styles.container, style]} onPress={onToggle}>
       <Text style={globalStyles.bigTitle}>{title}</Text>
 
       <View style={styles.stackedContainer}>
@@ -27,7 +27,7 @@ export default function Checkbox({
           <Icon style={styles.checkIcon} name="check" size={50} />
         ) : null}
       </View>
-    </View>
+    </Pressable>
   );
 }
 

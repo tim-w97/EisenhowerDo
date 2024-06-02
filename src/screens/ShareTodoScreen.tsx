@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Animated, StyleSheet, TextInput} from 'react-native';
+import {Text, StyleSheet, TextInput} from 'react-native';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../types/rootStackParamList.ts';
@@ -15,7 +15,6 @@ import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import selectTodoError from '../redux/selectors/selectTodoError.ts';
 import selectTodoSharedSuccessfully from '../redux/selectors/selectTodoSharedSuccessfully.ts';
 import showSnackbar from '../utils/showSnackbar.ts';
-import Text = Animated.Text;
 
 type Props = {
   navigation: NavigationProp<RootStackParamList>;

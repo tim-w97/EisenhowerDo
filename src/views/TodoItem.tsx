@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Todo} from '../types/todo.ts';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome6';
@@ -24,14 +24,16 @@ export default function TodoItem({todo}: TodoItemProps) {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.todoItem, getBackgroundColor()]} onTouchEnd={onTap}>
+      <Pressable
+        style={[styles.todoItem, getBackgroundColor()]}
+        onPress={onTap}>
         <Text style={[styles.todoText]}>{todo.title}</Text>
         {todo.isShared ? (
           <View style={styles.iconContainer}>
             <Icon name="user-group" size={25} />
           </View>
         ) : null}
-      </View>
+      </Pressable>
     </View>
   );
 

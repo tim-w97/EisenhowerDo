@@ -1,4 +1,4 @@
-import {Text} from 'react-native';
+import {Pressable, Text} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -14,12 +14,11 @@ export default function EditTodoButton() {
   }
 
   return (
-    <Text
-      style={globalStyles.actionButton}
+    <Pressable
       onPress={() => {
         navigation.navigate('EditTodo');
       }}>
-      Bearbeiten
-    </Text>
+      <Text style={globalStyles.actionButton}>Bearbeiten</Text>
+    </Pressable>
   );
 }

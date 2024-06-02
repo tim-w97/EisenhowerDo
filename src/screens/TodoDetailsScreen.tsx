@@ -1,10 +1,4 @@
-import {
-  Animated,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-} from 'react-native';
+import {SafeAreaView, View, StyleSheet, Text, TextInput} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React, {Fragment} from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
@@ -17,7 +11,6 @@ import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import text from '../styles/text.ts';
 import showSnackbar from '../utils/showSnackbar.ts';
-import View = Animated.View;
 
 type StackParamList = {
   TodoDetails: undefined;
