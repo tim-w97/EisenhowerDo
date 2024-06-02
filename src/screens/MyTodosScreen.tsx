@@ -65,12 +65,15 @@ export default function MyTodosScreen({navigation}: Props) {
     return <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />;
   }
 
-  console.log(sharedTodos);
+  // Combine users todos with shared todos
+  const combinedTodos = todos.concat(
+    sharedTodos.map(todo => ({...todo, isShared: true})),
+  );
 
   return (
     <SafeAreaView style={[globalStyles.safeArea, styles.safeArea]}>
       <FlatList
-        data={getSortedTodos(todos)}
+        data={getSortedTodos(combinedTodos)}
         renderItem={renderTodoItem}
         keyExtractor={item => item.id.toString()}
         numColumns={2}

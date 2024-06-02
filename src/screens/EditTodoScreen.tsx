@@ -118,7 +118,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
       return;
     }
 
-    const updatedTodo: Todo = {...pendingTodo, id: todo.id};
+    const updatedTodo: Todo = {...pendingTodo, id: todo.id, isShared: false};
 
     await dispatch(editTodo(updatedTodo));
     dispatch(todosSlice.actions.clearPendingTodo());

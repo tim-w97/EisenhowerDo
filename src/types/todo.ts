@@ -13,4 +13,6 @@ export type Todo = {
 
   // is this Todo urgent?
   isUrgent: boolean;
+
+  isShared: boolean;
 };
