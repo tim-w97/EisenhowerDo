@@ -1,7 +1,7 @@
-import {CredentialsDTO} from './dtos/credentialsDTO.ts';
+import {Credentials} from './dtos/credentials.ts';
 
 export type UserState = {
-  credentials: CredentialsDTO;
+  credentials: Credentials;
 
   token: string | null;
   status: 'loading' | 'idle';
