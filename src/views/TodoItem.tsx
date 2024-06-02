@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {useNavigation} from '@react-navigation/native';
+import text from '../styles/text.ts';
 
 type TodoItemProps = {
   todo: Todo;
@@ -23,7 +24,7 @@ export default function TodoItem({todo}: TodoItemProps) {
   return (
     <View style={styles.container}>
       <View style={[styles.todoItem, getPriorityColor()]} onTouchEnd={onTap}>
-        <Text>{todo.title}</Text>
+        <Text style={styles.todoText}>{todo.title}</Text>
         {todo.isShared ? (
           <View style={styles.iconContainer}>
             <Icon name="user-group" size={25} />
@@ -64,6 +65,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+  },
+
+  todoText: {
+    ...text.defaultText,
   },
 
   iconContainer: {
