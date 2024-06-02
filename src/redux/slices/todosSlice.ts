@@ -12,6 +12,7 @@ import setLastTappedTodo from '../reducers/setLastTappedTodo.ts';
 import setUserToShareTodoWith from '../reducers/setUserToShareTodoWith.ts';
 import clearUserToShareTodoWith from '../reducers/clearUserToShareTodoWith.ts';
 import setTodoSharedStatus from '../reducers/setTodoSharedStatus.ts';
+import clearTodos from '../reducers/clearTodos.ts';
 import fetchSharedTodos from '../thunks/fetchSharedTodos.ts';
 
 export default createSlice({
@@ -36,6 +37,7 @@ export default createSlice({
     clearPendingTodo,
     setUserToShareTodoWith,
     clearUserToShareTodoWith,
+    clearTodos,
     setTodoSharedStatus,
   },
   extraReducers: builder => {
