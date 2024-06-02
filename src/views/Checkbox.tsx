@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import Icon from 'react-native-vector-icons/Entypo';
+import colors from '../styles/colors.ts';
 
 type CheckboxProps = {
   style?: any;
@@ -52,11 +53,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 5,
     borderRadius: 5,
-    borderColor: 'lightblue',
+    ...colors.primaryBorder,
   },
   checkIcon: {
     position: 'absolute',
     top: 0,
     left: 0,
+    ...colors.icon,
   },
 });

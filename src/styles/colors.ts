@@ -19,4 +19,10 @@ export default StyleSheet.create({
   brightText: {
     color: '#FFFFFF',
   },
+  primaryBorder: {
+    borderColor: '#75B9BE',
+  },
+  icon: {
+    color: '#EE7674',
+  },
 });
