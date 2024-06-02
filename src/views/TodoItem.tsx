@@ -6,6 +6,7 @@ import todosSlice from '../redux/slices/todosSlice.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import {useNavigation} from '@react-navigation/native';
 import text from '../styles/text.ts';
+import colors from '../styles/colors.ts';
 
 type TodoItemProps = {
   todo: Todo;
@@ -23,8 +24,8 @@ export default function TodoItem({todo}: TodoItemProps) {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.todoItem, getPriorityColor()]} onTouchEnd={onTap}>
-        <Text style={styles.todoText}>{todo.title}</Text>
+      <View style={[styles.todoItem, getBackgroundColor()]} onTouchEnd={onTap}>
+        <Text style={[styles.todoText]}>{todo.title}</Text>
         {todo.isShared ? (
           <View style={styles.iconContainer}>
             <Icon name="user-group" size={25} />
@@ -34,22 +35,20 @@ export default function TodoItem({todo}: TodoItemProps) {
     </View>
   );
 
-  function getPriorityColor() {
-    let backgroundColor = 'lightgray';
-
+  function getBackgroundColor() {
     if (todo.isImportant && todo.isUrgent) {
-      backgroundColor = '#F5C2C1';
+      return colors.isImportantAndUrgent;
     }
 
     if (todo.isImportant && !todo.isUrgent) {
-      backgroundColor = 'lightgreen';
+      return colors.isImportant;
     }
 
     if (!todo.isImportant && todo.isUrgent) {
-      backgroundColor = 'lightyellow';
+      return colors.isUrgent;
     }
 
-    return {backgroundColor};
+    return colors.isNotImportantAndNotUrgent;
   }
 }
 
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
 
   todoText: {
     ...text.defaultText,
+    ...colors.darkText,
   },
 
   iconContainer: {
