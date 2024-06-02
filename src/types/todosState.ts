@@ -3,6 +3,7 @@ import {PendingTodo} from './dtos/pendingTodo.ts';
 
 export type TodosState = {
   todos: Todo[];
+  sharedTodos: Todo[];
   status: 'loading' | 'idle';
   error: string | null;
   lastTappedTodo: number;

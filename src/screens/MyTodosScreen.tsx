@@ -18,6 +18,8 @@ import {Todo} from '../types/todo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import getSortedTodos from '../utils/getSortedTodos.ts';
+import fetchSharedTodos from '../redux/thunks/fetchSharedTodos.ts';
+import selectSharedTodos from '../redux/selectors/selectSharedTodos.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -34,11 +36,13 @@ export default function MyTodosScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
   const todos = useAppSelector(selectAllTodos());
+  const sharedTodos = useAppSelector(selectSharedTodos());
   const status = useAppSelector(selectTodoStatus());
 
   useEffect(() => {
     navigation.addListener('focus', () => {
       dispatch(fetchTodos());
+      dispatch(fetchSharedTodos());
     });
   }, [dispatch, navigation]);
 
@@ -60,6 +64,8 @@ export default function MyTodosScreen({navigation}: Props) {
 
     return <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />;
   }
+
+  console.log(sharedTodos);
 
   return (
     <SafeAreaView style={[globalStyles.safeArea, styles.safeArea]}>

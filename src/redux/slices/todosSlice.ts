@@ -12,11 +12,13 @@ import setLastTappedTodo from '../reducers/setLastTappedTodo.ts';
 import setUserToShareTodoWith from '../reducers/setUserToShareTodoWith.ts';
 import clearUserToShareTodoWith from '../reducers/clearUserToShareTodoWith.ts';
 import setTodoSharedStatus from '../reducers/setTodoSharedStatus.ts';
+import fetchSharedTodos from '../thunks/fetchSharedTodos.ts';
 
 export default createSlice({
   name: 'todos',
   initialState: {
     todos: [],
+    sharedTodos: [],
     status: 'idle',
     error: null,
     lastTappedTodo: 0,
@@ -40,6 +42,7 @@ export default createSlice({
   extraReducers: builder => {
     // pending cases
     builder.addCase(fetchTodos.pending, pendingReducer);
+    builder.addCase(fetchSharedTodos.pending, pendingReducer);
     builder.addCase(addTodo.pending, pendingReducer);
     builder.addCase(deleteTodo.pending, pendingReducer);
     builder.addCase(shareTodo.pending, pendingReducer);
@@ -47,6 +50,7 @@ export default createSlice({
     // error cases
     builder.addCase(addTodo.rejected, errorReducer);
     builder.addCase(fetchTodos.rejected, errorReducer);
+    builder.addCase(fetchSharedTodos.rejected, errorReducer);
     builder.addCase(deleteTodo.rejected, errorReducer);
     builder.addCase(shareTodo.rejected, errorReducer);
 
@@ -54,6 +58,11 @@ export default createSlice({
     builder.addCase(fetchTodos.fulfilled, (state, action) => {
       state.status = 'idle';
       state.todos = action.payload;
+    });
+
+    builder.addCase(fetchSharedTodos.fulfilled, (state, action) => {
+      state.status = 'idle';
+      state.sharedTodos = action.payload;
     });
 
     builder.addCase(addTodo.fulfilled, state => {
