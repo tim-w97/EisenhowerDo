@@ -17,6 +17,7 @@ import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import View = Animated.View;
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import text from '../styles/text.ts';
 
 type StackParamList = {
   TodoDetails: undefined;
@@ -82,7 +83,9 @@ export default function TodoDetailsScreen({navigation}: Props) {
       {todo.isShared ? (
         <View style={styles.shareInfo}>
           <Icon name="information-outline" size={30} />
-          <Text>Dieses Todo wurde mit dir geteilt.</Text>
+          <Text style={text.defaultText}>
+            Dieses Todo wurde mit dir geteilt.
+          </Text>
         </View>
       ) : (
         <Fragment>
