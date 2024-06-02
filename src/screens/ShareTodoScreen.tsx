@@ -5,7 +5,6 @@ import {Animated, StyleSheet, TextInput} from 'react-native';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../types/rootStackParamList.ts';
-import Snackbar from 'react-native-snackbar';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import selectUserToShareTodoWith from '../redux/selectors/selectUserToShareTodoWith.ts';
@@ -15,6 +14,7 @@ import {useSelector} from 'react-redux';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import selectTodoError from '../redux/selectors/selectTodoError.ts';
 import selectTodoSharedSuccessfully from '../redux/selectors/selectTodoSharedSuccessfully.ts';
+import showSnackbar from '../utils/showSnackbar.ts';
 import Text = Animated.Text;
 
 type Props = {
@@ -31,17 +31,13 @@ export default function ShareTodoScreen({navigation}: Props) {
 
   useEffect(() => {
     if (error) {
-      Snackbar.show({
-        text: error,
-      });
+      showSnackbar(error);
     }
   }, [error]);
 
   useEffect(() => {
     if (todoSharedSuccessfully) {
-      Snackbar.show({
-        text: 'Todo wurde geteilt',
-      });
+      showSnackbar('Todo wurde geteilt');
 
       // Go back to MyTodosScreen
       navigation.goBack();
@@ -55,9 +51,7 @@ export default function ShareTodoScreen({navigation}: Props) {
     dispatch(todosSlice.actions.clearUserToShareTodoWith());
 
     if (username === '') {
-      Snackbar.show({
-        text: 'Bitte gib einen Benutzernamen ein',
-      });
+      showSnackbar('Bitte gib einen Benutzernamen ein');
 
       return;
     }

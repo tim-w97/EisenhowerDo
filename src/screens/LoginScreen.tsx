@@ -14,11 +14,11 @@ import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectLoginStatus from '../redux/selectors/selectLoginStatus.ts';
 import selectToken from '../redux/selectors/selectToken.ts';
 import register from '../redux/thunks/register.ts';
-import Snackbar from 'react-native-snackbar';
 import selectLoginError from '../redux/selectors/selectLoginError.ts';
 import selectCredentials from '../redux/selectors/selectCredentials.ts';
 import userSlice from '../redux/slices/userSlice.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
+import showSnackbar from '../utils/showSnackbar.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -51,25 +51,17 @@ export default function LoginScreen({navigation}: Props) {
       return;
     }
 
-    Snackbar.show({
-      text: error,
-    });
+    showSnackbar(error);
   }, [error]);
 
   function checkForEmptyValues(): boolean {
     if (credentials.username.trim() === '') {
-      Snackbar.show({
-        text: 'Bitte gib einen Benutzernamen ein',
-      });
-
+      showSnackbar('Bitte gib einen Benutzernamen ein');
       return false;
     }
 
     if (credentials.password.trim() === '') {
-      Snackbar.show({
-        text: 'Bitte gib ein Passwort ein',
-      });
-
+      showSnackbar('Bitte gib ein Passwort ein');
       return false;
     }
 

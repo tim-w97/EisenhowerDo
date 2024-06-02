@@ -10,14 +10,14 @@ import React, {Fragment} from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
-import Snackbar from 'react-native-snackbar';
 import {RootStackParamList} from '../types/rootStackParamList.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
-import View = Animated.View;
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import text from '../styles/text.ts';
+import showSnackbar from '../utils/showSnackbar.ts';
+import View = Animated.View;
 
 type StackParamList = {
   TodoDetails: undefined;
@@ -38,9 +38,7 @@ export default function TodoDetailsScreen({navigation}: Props) {
 
     navigation.goBack();
 
-    Snackbar.show({
-      text: 'Todo ist erledigt',
-    });
+    showSnackbar('Todo ist erledigt');
   }
 
   function onShare() {

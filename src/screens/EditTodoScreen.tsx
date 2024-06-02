@@ -7,7 +7,6 @@ import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';
-import Snackbar from 'react-native-snackbar';
 import Checkbox from '../views/Checkbox.tsx';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import selectPendingTodo from '../redux/selectors/selectPendingTodo.ts';
@@ -15,6 +14,7 @@ import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import editTodo from '../redux/thunks/editTodo.ts';
 import {Todo} from '../types/todo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
+import showSnackbar from '../utils/showSnackbar.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
@@ -103,18 +103,13 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
 
   async function onChangeTodo() {
     if (pendingTodo.title.trim() === '') {
-      Snackbar.show({
-        text: 'Bitte gib einen Titel ein',
-      });
+      showSnackbar('Bitte gib einen Titel ein');
 
       return;
     }
 
     if (pendingTodo.text.trim() === '') {
-      Snackbar.show({
-        text: 'Bitte gib eine Beschreibung ein',
-      });
-
+      showSnackbar('Bitte gib eine Beschreibung ein');
       return;
     }
 
@@ -126,9 +121,7 @@ export default function EditTodoScreen({navigation}: Props): React.JSX.Element {
     navigation.goBack();
     navigation.goBack();
 
-    Snackbar.show({
-      text: 'Todo wurde geändert',
-    });
+    showSnackbar('Todo wurde geändert');
   }
 }
 
