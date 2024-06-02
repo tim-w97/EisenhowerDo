@@ -16,7 +16,6 @@ import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {Todo} from '../types/todo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
-import todosSlice from '../redux/slices/todosSlice.ts';
 import getSortedTodos from '../utils/getSortedTodos.ts';
 import fetchSharedTodos from '../redux/thunks/fetchSharedTodos.ts';
 import selectSharedTodos from '../redux/selectors/selectSharedTodos.ts';
@@ -50,11 +49,6 @@ export default function MyTodosScreen({navigation}: Props) {
     navigation.navigate('AddTodo');
   }
 
-  function onTodoItemTapped(todoID: number) {
-    dispatch(todosSlice.actions.setLastTappedTodo(todoID));
-    navigation.navigate('TodoDetails', {todoID});
-  }
-
   if (status === 'loading') {
     return <LoadingScreen />;
   }
@@ -62,7 +56,7 @@ export default function MyTodosScreen({navigation}: Props) {
   function renderTodoItem(itemInfo: ListRenderItemInfo<Todo>) {
     const todo = itemInfo.item;
 
-    return <TodoItem key={todo.id} todo={todo} onTap={onTodoItemTapped} />;
+    return <TodoItem key={todo.id} todo={todo} />;
   }
 
   // Combine users todos with shared todos

@@ -2,18 +2,27 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Todo} from '../types/todo.ts';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import todosSlice from '../redux/slices/todosSlice.ts';
+import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import {useNavigation} from '@react-navigation/native';
 
 type TodoItemProps = {
   todo: Todo;
-  onTap: (todoID: number) => void;
 };
 
-export default function TodoItem({todo, onTap}: TodoItemProps) {
+export default function TodoItem({todo}: TodoItemProps) {
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation();
+
+  function onTap() {
+    dispatch(todosSlice.actions.setLastTappedTodo(todo));
+
+    navigation.navigate('TodoDetails');
+  }
+
   return (
     <View style={styles.container}>
-      <View
-        style={[styles.todoItem, getPriorityColor()]}
-        onTouchEnd={() => onTap(todo.id)}>
+      <View style={[styles.todoItem, getPriorityColor()]} onTouchEnd={onTap}>
         <Text>{todo.title}</Text>
         {todo.isShared ? (
           <View style={styles.iconContainer}>

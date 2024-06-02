@@ -6,8 +6,9 @@ export type TodosState = {
   sharedTodos: Todo[];
   status: 'loading' | 'idle';
   error: string | null;
-  lastTappedTodo: number;
   pendingTodo: PendingTodo;
   userToShareTodoWith: string;
   todoSharedSuccessfully: boolean;
+
+  lastTappedTodo?: Todo;
 };

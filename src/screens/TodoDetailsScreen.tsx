@@ -1,14 +1,14 @@
 import {SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
-import React from 'react';
+import React, {Fragment} from 'react';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
 import Snackbar from 'react-native-snackbar';
 import {RootStackParamList} from '../types/rootStackParamList.ts';
-import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
+import useAppSelector from '../redux/hooks/useAppSelector.ts';
+import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
 
 type StackParamList = {
   TodoDetails: undefined;
@@ -22,7 +22,7 @@ type Props = {
 export default function TodoDetailsScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
-  const todo = useSelector(selectLastTappedTodo());
+  const todo = useAppSelector(selectLastTappedTodo());
 
   async function onComplete() {
     await dispatch(deleteTodo(todo.id));
@@ -71,16 +71,20 @@ export default function TodoDetailsScreen({navigation}: Props) {
         numberOfLines={5}
         placeholder="Beschreibung"
       />
-      <FixedBottomButton
-        text="Mit anderem Benutzer teilen"
-        onTap={onShare}
-        isTop
-      />
-      <FixedBottomButton
-        text="Habe ich erledigt"
-        onTap={onComplete}
-        backgroundColor="lightgreen"
-      />
+      {todo.isShared ? null : (
+        <Fragment>
+          <FixedBottomButton
+            text="Mit anderem Benutzer teilen"
+            onTap={onShare}
+            isTop
+          />
+          <FixedBottomButton
+            text="Habe ich erledigt"
+            onTap={onComplete}
+            backgroundColor="lightgreen"
+          />
+        </Fragment>
+      )}
     </SafeAreaView>
   );
 }

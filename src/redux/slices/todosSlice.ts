@@ -21,7 +21,6 @@ export default createSlice({
     sharedTodos: [],
     status: 'idle',
     error: null,
-    lastTappedTodo: 0,
     pendingTodo: {
       title: '',
       text: '',
