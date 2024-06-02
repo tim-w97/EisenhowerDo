@@ -37,7 +37,6 @@ export default function TodoItem({todo}: TodoItemProps) {
     let backgroundColor = 'lightgray';
 
     if (todo.isImportant && todo.isUrgent) {
-      // TODO: create a custom scheme for the whole app
       backgroundColor = '#F5C2C1';
     }
 
