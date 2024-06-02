@@ -1,7 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import globalStyles from '../styles/globalStyles.ts';
 import colors from '../styles/colors.ts';
+import shadows from '../styles/shadows.ts';
+import text from '../styles/text.ts';
 
 type FixedBottomButtonProps = {
   text: string;
@@ -44,13 +45,13 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     paddingHorizontal: 20,
     paddingVertical: 15,
-    ...globalStyles.shadow,
+    ...shadows.defaultShadow,
     ...colors.primary,
   },
   buttonText: {
-    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
     ...colors.brightText,
+    ...text.bigTitle,
   },
 });

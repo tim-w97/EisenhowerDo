@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
 import colors from './colors.ts';
+import shadows from './shadows.ts';
+import text from './text.ts';
 
 export default StyleSheet.create({
   safeArea: {
@@ -10,36 +12,19 @@ export default StyleSheet.create({
 
   bigTitle: {
     fontWeight: 'bold',
-    fontSize: 20,
+    ...text.bigTitle,
   },
 
   textInput: {
     borderRadius: 5,
     padding: 15,
     ...colors.brightBackground,
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
+    ...shadows.defaultShadow,
+    ...text.defaultText,
   },
 
   actionButton: {
     padding: 10,
     color: 'blue',
-  },
-
-  shadow: {
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
   },
 });
