@@ -12,6 +12,8 @@ import LogOutButton from './views/LogOutButton.tsx';
 import EditTodoButton from './views/EditTodoButton.tsx';
 import EditTodoScreen from './screens/EditTodoScreen.tsx';
 import ShareTodoScreen from './screens/ShareTodoScreen.tsx';
+import colors from './styles/colors.ts';
+import shadows from './styles/shadows.ts';
 
 declare global {
   namespace ReactNavigation {
@@ -26,7 +28,15 @@ export default function App(): React.JSX.Element {
     // TODO: add a welcome screen / splash screen, explaining how the app works
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="LoginScreen">
+        <Stack.Navigator
+          initialRouteName="LoginScreen"
+          screenOptions={{
+            headerStyle: {
+              ...colors.primary,
+              ...colors.brightText,
+              ...shadows.defaultShadow,
+            },
+          }}>
           <Stack.Screen
             name="LoginScreen"
             component={LoginScreen}

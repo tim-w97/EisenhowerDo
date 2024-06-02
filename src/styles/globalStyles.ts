@@ -25,6 +25,7 @@ export default StyleSheet.create({
 
   actionButton: {
     padding: 10,
-    color: 'blue',
+    ...text.defaultText,
+    ...colors.brightText,
   },
 });
