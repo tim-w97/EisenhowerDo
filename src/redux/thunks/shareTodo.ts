@@ -29,6 +29,8 @@ export default createAsyncThunk(
         const {message} = await response.json();
         return thunkAPI.rejectWithValue(message);
       }
+
+      return true;
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue('Ein Netzwerkfehler ist aufgetreten');

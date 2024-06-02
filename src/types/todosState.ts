@@ -8,4 +8,5 @@ export type TodosState = {
   lastTappedTodo: number;
   pendingTodo: PendingTodo;
   userToShareTodoWith: string;
+  todoSharedSuccessfully: boolean;
 };

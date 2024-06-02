@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Animated, StyleSheet, TextInput} from 'react-native';
-import Text = Animated.Text;
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../types/rootStackParamList.ts';
@@ -11,6 +10,12 @@ import todosSlice from '../redux/slices/todosSlice.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import selectUserToShareTodoWith from '../redux/selectors/selectUserToShareTodoWith.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
+import shareTodo from '../redux/thunks/shareTodo.ts';
+import {useSelector} from 'react-redux';
+import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
+import selectTodoError from '../redux/selectors/selectTodoError.ts';
+import selectTodoSharedSuccessfully from '../redux/selectors/selectTodoSharedSuccessfully.ts';
+import Text = Animated.Text;
 
 type Props = {
   navigation: NavigationProp<RootStackParamList>;
@@ -19,8 +24,34 @@ type Props = {
 export default function ShareTodoScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
   const username = useAppSelector(selectUserToShareTodoWith());
+  const todo = useSelector(selectLastTappedTodo());
+  const todoSharedSuccessfully = useSelector(selectTodoSharedSuccessfully());
 
-  function onShare() {
+  const error = useAppSelector(selectTodoError());
+
+  useEffect(() => {
+    if (error) {
+      Snackbar.show({
+        text: error,
+      });
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (todoSharedSuccessfully) {
+      Snackbar.show({
+        text: 'Todo wurde geteilt',
+      });
+
+      // Go back to MyTodosScreen
+      navigation.goBack();
+      navigation.goBack();
+
+      dispatch(todosSlice.actions.setTodoSharedStatus(false));
+    }
+  }, [todoSharedSuccessfully, navigation, dispatch]);
+
+  async function onShare() {
     dispatch(todosSlice.actions.clearUserToShareTodoWith());
 
     if (username === '') {
@@ -31,13 +62,9 @@ export default function ShareTodoScreen({navigation}: Props) {
       return;
     }
 
-    // Go back to MyTodos
-    navigation.goBack();
-    navigation.goBack();
+    const sharedTodo = {todoID: todo.id, username};
 
-    Snackbar.show({
-      text: 'Todo wurde geteilt',
-    });
+    dispatch(shareTodo(sharedTodo));
   }
 
   return (
