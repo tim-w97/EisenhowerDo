@@ -47,12 +47,12 @@ export default function App(): React.JSX.Element {
 
           {/* Other Screens */}
           <Stack.Screen
-            name="LoginScreen"
+            name="Login"
             component={LoginScreen}
             options={{title: 'Einloggen'}}
           />
           <Stack.Screen
-            name="MyTodosScreen"
+            name="MyTodos"
             component={MyTodosScreen}
             options={{
               title: 'Meine Todos',

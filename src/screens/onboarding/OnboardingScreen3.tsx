@@ -11,7 +11,7 @@ export default function OnboardingScreen3() {
   function onContinue() {
     navigation.reset({
       index: 0,
-      routes: [{name: 'LoginScreen'}],
+      routes: [{name: 'Login'}],
     });
   }
 

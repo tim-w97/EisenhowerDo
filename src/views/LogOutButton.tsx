@@ -18,7 +18,7 @@ export default function LogOutButton() {
 
         navigation.reset({
           index: 0,
-          routes: [{name: 'LoginScreen'}],
+          routes: [{name: 'Login'}],
         });
       }}>
       <Text style={globalStyles.actionButton}>Ausloggen</Text>
