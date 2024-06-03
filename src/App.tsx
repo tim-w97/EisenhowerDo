@@ -17,6 +17,7 @@ import shadows from './styles/shadows.ts';
 import OnboardingScreen1 from './screens/onboarding/OnboardingScreen1.tsx';
 import OnboardingScreen3 from './screens/onboarding/OnboardingScreen3.tsx';
 import OnboardingScreen2 from './screens/onboarding/OnboardingScreen2.tsx';
+import HelpButton from './views/HelpButton.tsx';
 
 declare global {
   namespace ReactNavigation {
@@ -40,17 +41,21 @@ export default function App(): React.JSX.Element {
             },
           }}>
           {/* Onboarding */}
-
           <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
           <Stack.Screen name="Onboarding2" component={OnboardingScreen2} />
           <Stack.Screen name="Onboarding3" component={OnboardingScreen3} />
 
-          {/* Other Screens */}
+          {/* Authentication */}
           <Stack.Screen
             name="Login"
             component={LoginScreen}
-            options={{title: 'Einloggen'}}
+            options={{
+              title: 'Einloggen',
+              headerRight: HelpButton,
+            }}
           />
+
+          {/* Todo-related screens */}
           <Stack.Screen
             name="MyTodos"
             component={MyTodosScreen}
