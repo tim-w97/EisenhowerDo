@@ -16,7 +16,10 @@ export default function LogOutButton() {
         dispatch(todosSlice.actions.clearTodos());
         dispatch(userSlice.actions.logout());
 
-        navigation.dispatch(StackActions.replace('LoginScreen'));
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'LoginScreen'}],
+        });
       }}>
       <Text style={globalStyles.actionButton}>Ausloggen</Text>
     </Pressable>

@@ -14,6 +14,9 @@ import EditTodoScreen from './screens/EditTodoScreen.tsx';
 import ShareTodoScreen from './screens/ShareTodoScreen.tsx';
 import colors from './styles/colors.ts';
 import shadows from './styles/shadows.ts';
+import OnboardingScreen1 from './screens/onboarding/OnboardingScreen1.tsx';
+import OnboardingScreen3 from './screens/onboarding/OnboardingScreen3.tsx';
+import OnboardingScreen2 from './screens/onboarding/OnboardingScreen2.tsx';
 
 declare global {
   namespace ReactNavigation {
@@ -25,11 +28,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App(): React.JSX.Element {
   return (
-    // TODO: add a welcome screen / splash screen, explaining how the app works
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="LoginScreen"
+          initialRouteName="Onboarding1"
           screenOptions={{
             headerStyle: {
               ...colors.primary,
@@ -37,6 +39,13 @@ export default function App(): React.JSX.Element {
               ...shadows.defaultShadow,
             },
           }}>
+          {/* Onboarding */}
+
+          <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
+          <Stack.Screen name="Onboarding2" component={OnboardingScreen2} />
+          <Stack.Screen name="Onboarding3" component={OnboardingScreen3} />
+
+          {/* Other Screens */}
           <Stack.Screen
             name="LoginScreen"
             component={LoginScreen}
