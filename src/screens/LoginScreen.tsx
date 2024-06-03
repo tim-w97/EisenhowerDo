@@ -7,7 +7,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import {NavigationProp, StackActions} from '@react-navigation/native';
+import {NavigationProp} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import login from '../redux/thunks/login.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
@@ -22,8 +22,8 @@ import showSnackbar from '../utils/showSnackbar.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
-  LoginScreen: undefined;
-  MyTodosScreen: undefined;
+  Login: undefined;
+  MyTodos: undefined;
 };
 
 type Props = {
@@ -42,7 +42,11 @@ export default function LoginScreen({navigation}: Props) {
     // if there is a token, the user is logged in
     if (token) {
       dispatch(userSlice.actions.clearCredentials());
-      navigation.dispatch(StackActions.replace('MyTodosScreen'));
+
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'MyTodos'}],
+      });
     }
   }, [dispatch, navigation, token]);
 

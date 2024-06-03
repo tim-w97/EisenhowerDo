@@ -1,4 +1,4 @@
-import {StackActions, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Pressable, Text} from 'react-native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
