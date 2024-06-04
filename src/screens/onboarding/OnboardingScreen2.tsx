@@ -12,7 +12,7 @@ import FixedBottomButton from '../../views/FixedBottomButton.tsx';
 import {useNavigation} from '@react-navigation/native';
 import text from '../../styles/text.ts';
 import TodoItem from '../../views/TodoItem.tsx';
-import onboardingTodos from '../../data/onboardingTodos.ts';
+import onboardingTodos from '../../data/onboardingExampleTodos.ts';
 import {Todo} from '../../types/todo.ts';
 
 export default function OnboardingScreen2() {
