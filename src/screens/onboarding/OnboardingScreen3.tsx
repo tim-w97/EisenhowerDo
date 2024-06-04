@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import FixedBottomButton from '../../views/FixedBottomButton.tsx';
 import {useNavigation} from '@react-navigation/native';
-import {setOnboardingStatus} from '../../utils/storage.ts';
+import {setOnboardingStatus} from '../../utils/onboardingStatus.ts';
 import text from '../../styles/text.ts';
 import TodoItem from '../../views/TodoItem.tsx';
 import {Todo} from '../../types/todo.ts';

@@ -19,7 +19,7 @@ import selectCredentials from '../redux/selectors/selectCredentials.ts';
 import userSlice from '../redux/slices/userSlice.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import showSnackbar from '../utils/showSnackbar.ts';
-import {getOnboardingStatus} from '../utils/storage.ts';
+import {getOnboardingStatus} from '../utils/onboardingStatus.ts';
 import navigateAndReset from '../utils/navigateAndReset.ts';
 
 export default function LoginScreen() {
