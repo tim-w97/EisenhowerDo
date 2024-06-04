@@ -15,17 +15,14 @@ import text from '../../styles/text.ts';
 import TodoItem from '../../views/TodoItem.tsx';
 import {Todo} from '../../types/todo.ts';
 import dummySharedTodos from '../../data/dummySharedTodos.ts';
+import navigateAndReset from '../../extensions/navigateAndReset.ts';
 
 export default function OnboardingScreen3() {
   const navigation = useNavigation();
 
   async function onLetsGo() {
     await setOnboardingStatus('seen');
-
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'Login'}],
-    });
+    navigateAndReset(navigation, 'Login');
   }
 
   function renderTodoItem(itemInfo: ListRenderItemInfo<Todo>) {

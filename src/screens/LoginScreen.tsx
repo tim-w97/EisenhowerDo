@@ -7,7 +7,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import {NavigationProp, useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import login from '../redux/thunks/login.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
@@ -20,19 +20,11 @@ import userSlice from '../redux/slices/userSlice.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import showSnackbar from '../utils/showSnackbar.ts';
 import {getOnboardingStatus} from '../utils/storage.ts';
+import navigateAndReset from '../extensions/navigateAndReset.ts';
 
-type StackParamList = {
-  // undefined means that this screen doesn't receive any params
-  Login: undefined;
-  MyTodos: undefined;
-  Onboarding1: undefined;
-};
+export default function LoginScreen() {
+  const navigation = useNavigation();
 
-type Props = {
-  navigation: NavigationProp<StackParamList>;
-};
-
-export default function LoginScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectLoginStatus());
 
@@ -44,10 +36,7 @@ export default function LoginScreen({navigation}: Props) {
   useFocusEffect(() => {
     getOnboardingStatus().then(onboardingStatus => {
       if (onboardingStatus === 'notSeen') {
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'Onboarding1'}],
-        });
+        navigateAndReset(navigation, 'Onboarding1');
       }
     });
   });
@@ -56,11 +45,7 @@ export default function LoginScreen({navigation}: Props) {
   useEffect(() => {
     if (token) {
       dispatch(userSlice.actions.clearCredentials());
-
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'MyTodos'}],
-      });
+      navigateAndReset(navigation, 'MyTodos');
     }
   }, [dispatch, navigation, token]);
 
