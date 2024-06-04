@@ -3,7 +3,7 @@ import {Pressable, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import colors from '../styles/colors.ts';
 import {useNavigation} from '@react-navigation/native';
-import navigateAndReset from '../extensions/navigateAndReset.ts';
+import navigateAndReset from '../utils/navigateAndReset.ts';
 
 export default function HelpButton() {
   const navigation = useNavigation();

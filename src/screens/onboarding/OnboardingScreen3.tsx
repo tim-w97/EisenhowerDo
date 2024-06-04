@@ -15,7 +15,7 @@ import text from '../../styles/text.ts';
 import TodoItem from '../../views/TodoItem.tsx';
 import {Todo} from '../../types/todo.ts';
 import dummySharedTodos from '../../data/dummySharedTodos.ts';
-import navigateAndReset from '../../extensions/navigateAndReset.ts';
+import navigateAndReset from '../../utils/navigateAndReset.ts';
 
 export default function OnboardingScreen3() {
   const navigation = useNavigation();
