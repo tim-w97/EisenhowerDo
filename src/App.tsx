@@ -41,9 +41,21 @@ export default function App(): React.JSX.Element {
             },
           }}>
           {/* Onboarding */}
-          <Stack.Screen name="Onboarding1" component={OnboardingScreen1} />
-          <Stack.Screen name="Onboarding2" component={OnboardingScreen2} />
-          <Stack.Screen name="Onboarding3" component={OnboardingScreen3} />
+          <Stack.Screen
+            name="Onboarding1"
+            component={OnboardingScreen1}
+            options={{title: 'Tutorial 1/3'}}
+          />
+          <Stack.Screen
+            name="Onboarding2"
+            component={OnboardingScreen2}
+            options={{title: 'Tutorial 2/3'}}
+          />
+          <Stack.Screen
+            name="Onboarding3"
+            component={OnboardingScreen3}
+            options={{title: 'Tutorial 3/3'}}
+          />
 
           {/* Authentication */}
           <Stack.Screen
