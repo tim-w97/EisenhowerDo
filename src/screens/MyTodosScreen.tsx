@@ -3,6 +3,8 @@ import {
   ListRenderItemInfo,
   SafeAreaView,
   StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
@@ -66,13 +68,19 @@ export default function MyTodosScreen({navigation}: Props) {
 
   return (
     <SafeAreaView style={[globalStyles.safeArea, styles.safeArea]}>
-      <FlatList
-        data={getSortedTodos(combinedTodos)}
-        renderItem={renderTodoItem}
-        keyExtractor={item => item.id.toString()}
-        numColumns={2}
-        contentContainerStyle={styles.listContainer}
-      />
+      {combinedTodos.length > 0 ? (
+        <FlatList
+          data={getSortedTodos(combinedTodos)}
+          renderItem={renderTodoItem}
+          keyExtractor={item => item.id.toString()}
+          numColumns={2}
+          contentContainerStyle={styles.listContainer}
+        />
+      ) : (
+        <View style={styles.noTodosInfoContainer}>
+          <Text style={globalStyles.bigTitle}>Du hast keine Todos. 🥺</Text>
+        </View>
+      )}
       <FixedBottomButton text="Neues Todo" onTap={onAddNewTodo} />
     </SafeAreaView>
   );
@@ -81,6 +89,11 @@ export default function MyTodosScreen({navigation}: Props) {
 const styles = StyleSheet.create({
   safeArea: {
     padding: 0,
+  },
+  noTodosInfoContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: 20,
   },
   listContainer: {
     padding: 10,
