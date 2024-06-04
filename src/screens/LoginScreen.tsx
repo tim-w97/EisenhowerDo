@@ -7,7 +7,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import login from '../redux/thunks/login.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
@@ -41,10 +41,8 @@ export default function LoginScreen({navigation}: Props) {
   const error = useAppSelector(selectLoginError());
 
   // Navigate to the onboarding if the user hasn't seen it yet
-  useEffect(() => {
-    navigation.addListener('focus', async () => {
-      const onboardingStatus = await getOnboardingStatus();
-
+  useFocusEffect(() => {
+    getOnboardingStatus().then(onboardingStatus => {
       if (onboardingStatus === 'notSeen') {
         navigation.reset({
           index: 0,
@@ -52,7 +50,7 @@ export default function LoginScreen({navigation}: Props) {
         });
       }
     });
-  }, [navigation]);
+  });
 
   // If there is a token, navigate the user directly to the todos
   useEffect(() => {
