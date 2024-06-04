@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Pressable, Text} from 'react-native';
-import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import useAppDispatch from '../redux/hooks/useAppDispatch.ts';
 import userSlice from '../redux/slices/userSlice.ts';
 import globalStyles from '../styles/globalStyles.ts';
 import todosSlice from '../redux/slices/todosSlice.ts';

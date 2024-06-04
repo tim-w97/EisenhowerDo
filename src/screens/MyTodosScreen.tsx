@@ -13,7 +13,7 @@ import globalStyles from '../styles/globalStyles.ts';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 import fetchTodos from '../redux/thunks/fetchTodos.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
-import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import useAppDispatch from '../redux/hooks/useAppDispatch.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import LoadingScreen from './LoadingScreen.tsx';
 import {Todo} from '../types/todo.ts';

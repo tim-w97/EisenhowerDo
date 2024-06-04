@@ -5,7 +5,7 @@ import {StyleSheet, Text, TextInput} from 'react-native';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import {useNavigation} from '@react-navigation/native';
 import todosSlice from '../redux/slices/todosSlice.ts';
-import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import useAppDispatch from '../redux/hooks/useAppDispatch.ts';
 import selectUserToShareTodoWith from '../redux/selectors/selectUserToShareTodoWith.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import shareTodo from '../redux/thunks/shareTodo.ts';

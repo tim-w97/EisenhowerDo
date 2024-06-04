@@ -3,7 +3,7 @@ import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import 'react-native-get-random-values';
 import {useNavigation} from '@react-navigation/native';
-import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import useAppDispatch from '../redux/hooks/useAppDispatch.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectTodoStatus from '../redux/selectors/selectTodoStatus.ts';
 import LoadingScreen from './LoadingScreen.tsx';

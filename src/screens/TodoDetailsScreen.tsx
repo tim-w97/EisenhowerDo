@@ -2,7 +2,7 @@ import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React, {Fragment} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import useAppDispatch from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';

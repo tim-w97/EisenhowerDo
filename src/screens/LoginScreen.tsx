@@ -8,7 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
+import useAppDispatch from '../redux/hooks/useAppDispatch.ts';
 import login from '../redux/thunks/login.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectLoginStatus from '../redux/selectors/selectLoginStatus.ts';
