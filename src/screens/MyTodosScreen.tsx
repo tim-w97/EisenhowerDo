@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 import fetchTodos from '../redux/thunks/fetchTodos.ts';
@@ -44,6 +44,8 @@ export default function MyTodosScreen({navigation}: Props) {
     dispatch(fetchTodos());
     dispatch(fetchSharedTodos());
   }, [dispatch]);
+
+  useFocusEffect(fetchAllTodos);
 
   useEffect(() => {
     fetchAllTodos();
