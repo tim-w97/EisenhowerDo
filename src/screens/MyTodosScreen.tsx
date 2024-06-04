@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
 import {NavigationProp} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
@@ -40,12 +40,14 @@ export default function MyTodosScreen({navigation}: Props) {
   const sharedTodos = useAppSelector(selectSharedTodos());
   const status = useAppSelector(selectTodoStatus());
 
+  const fetchAllTodos = useCallback(() => {
+    dispatch(fetchTodos());
+    dispatch(fetchSharedTodos());
+  }, [dispatch]);
+
   useEffect(() => {
-    navigation.addListener('focus', () => {
-      dispatch(fetchTodos());
-      dispatch(fetchSharedTodos());
-    });
-  }, [dispatch, navigation]);
+    fetchAllTodos();
+  }, [fetchAllTodos]);
 
   function onAddNewTodo() {
     navigation.navigate('AddTodo');
@@ -70,6 +72,8 @@ export default function MyTodosScreen({navigation}: Props) {
     <SafeAreaView style={[globalStyles.safeArea, styles.safeArea]}>
       {combinedTodos.length > 0 ? (
         <FlatList
+          refreshing={false}
+          onRefresh={fetchAllTodos}
           data={getSortedTodos(combinedTodos)}
           renderItem={renderTodoItem}
           keyExtractor={item => item.id.toString()}
