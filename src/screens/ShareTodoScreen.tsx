@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
 import globalStyles from '../styles/globalStyles.ts';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text, StyleSheet, TextInput} from 'react-native';
+import {StyleSheet, Text, TextInput} from 'react-native';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
-import {NavigationProp} from '@react-navigation/native';
-import {RootStackParamList} from '../types/rootStackParamList.ts';
+import {useNavigation} from '@react-navigation/native';
 import todosSlice from '../redux/slices/todosSlice.ts';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import selectUserToShareTodoWith from '../redux/selectors/selectUserToShareTodoWith.ts';
@@ -16,11 +15,9 @@ import selectTodoError from '../redux/selectors/selectTodoError.ts';
 import selectTodoSharedSuccessfully from '../redux/selectors/selectTodoSharedSuccessfully.ts';
 import showSnackbar from '../utils/showSnackbar.ts';
 
-type Props = {
-  navigation: NavigationProp<RootStackParamList>;
-};
+export default function ShareTodoScreen() {
+  const navigation = useNavigation();
 
-export default function ShareTodoScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
   const username = useAppSelector(selectUserToShareTodoWith());
   const todo = useSelector(selectLastTappedTodo());

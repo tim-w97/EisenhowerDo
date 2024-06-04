@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import 'react-native-get-random-values';
-import {NavigationProp} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import addTodo from '../redux/thunks/addTodo.ts';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
@@ -14,16 +14,9 @@ import selectPendingTodo from '../redux/selectors/selectPendingTodo.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import showSnackbar from '../utils/showSnackbar.ts';
 
-type StackParamList = {
-  // undefined means that this screen doesn't receive any params
-  MyTodos: undefined;
-};
+export default function AddTodoScreen(): React.JSX.Element {
+  const navigation = useNavigation();
 
-type Props = {
-  navigation: NavigationProp<StackParamList>;
-};
-
-export default function AddTodoScreen({navigation}: Props): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const status = useAppSelector(selectTodoStatus());

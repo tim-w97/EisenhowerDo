@@ -1,10 +1,9 @@
-import {SafeAreaView, View, StyleSheet, Text, TextInput} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TextInput, View} from 'react-native';
 import globalStyles from '../styles/globalStyles.ts';
 import React, {Fragment} from 'react';
-import {NavigationProp, RouteProp} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useAppDispatch} from '../redux/hooks/useAppDispatch.ts';
 import deleteTodo from '../redux/thunks/deleteTodo.ts';
-import {RootStackParamList} from '../types/rootStackParamList.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import useAppSelector from '../redux/hooks/useAppSelector.ts';
 import selectLastTappedTodo from '../redux/selectors/selectLastTappedTodo.ts';
@@ -12,16 +11,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import text from '../styles/text.ts';
 import showSnackbar from '../utils/showSnackbar.ts';
 
-type StackParamList = {
-  TodoDetails: undefined;
-};
-
-type Props = {
-  navigation: NavigationProp<RootStackParamList>;
-  route: RouteProp<StackParamList>;
-};
-
-export default function TodoDetailsScreen({navigation}: Props) {
+export default function TodoDetailsScreen() {
+  const navigation = useNavigation();
   const dispatch = useAppDispatch();
 
   const todo = useAppSelector(selectLastTappedTodo());

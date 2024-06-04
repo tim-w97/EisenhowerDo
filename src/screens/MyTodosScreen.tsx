@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import TodoItem from '../views/TodoItem.tsx';
-import {NavigationProp, useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/globalStyles.ts';
 import selectAllTodos from '../redux/selectors/selectAllTodos.ts';
 import fetchTodos from '../redux/thunks/fetchTodos.ts';
@@ -23,17 +23,8 @@ import fetchSharedTodos from '../redux/thunks/fetchSharedTodos.ts';
 import selectSharedTodos from '../redux/selectors/selectSharedTodos.ts';
 import todosSlice from '../redux/slices/todosSlice.ts';
 
-type StackParamList = {
-  // undefined means that this screen doesn't receive any params
-  AddTodo: undefined;
-  TodoDetails: undefined;
-};
-
-type Props = {
-  navigation: NavigationProp<StackParamList>;
-};
-
-export default function MyTodosScreen({navigation}: Props) {
+export default function MyTodosScreen() {
+  const navigation = useNavigation();
   const dispatch = useAppDispatch();
 
   const todos = useAppSelector(selectAllTodos());
