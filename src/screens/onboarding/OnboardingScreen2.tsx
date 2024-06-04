@@ -49,7 +49,7 @@ export default function OnboardingScreen2() {
         />
       </View>
       <Text style={[text.defaultText, styles.bottomText]}>
-        Mit dieser Methode helfen wir dir, dich auf das Wesentliche zu
+        Mit dieser Methode helfe ich dir, dich auf das Wesentliche zu
         konzentrieren und effizienter zu arbeiten.
       </Text>
       <FixedBottomButton text="Weiter" onTap={onContinue} />

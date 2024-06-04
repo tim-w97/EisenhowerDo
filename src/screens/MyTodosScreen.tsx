@@ -21,12 +21,12 @@ import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import getSortedTodos from '../utils/getSortedTodos.ts';
 import fetchSharedTodos from '../redux/thunks/fetchSharedTodos.ts';
 import selectSharedTodos from '../redux/selectors/selectSharedTodos.ts';
+import todosSlice from '../redux/slices/todosSlice.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
   AddTodo: undefined;
-
-  TodoDetails: {todoID: number};
+  TodoDetails: undefined;
 };
 
 type Props = {
@@ -55,6 +55,11 @@ export default function MyTodosScreen({navigation}: Props) {
     navigation.navigate('AddTodo');
   }
 
+  function onTodoTap(todo: Todo) {
+    dispatch(todosSlice.actions.setLastTappedTodo(todo));
+    navigation.navigate('TodoDetails');
+  }
+
   if (status === 'loading') {
     return <LoadingScreen />;
   }
@@ -62,7 +67,7 @@ export default function MyTodosScreen({navigation}: Props) {
   function renderTodoItem(itemInfo: ListRenderItemInfo<Todo>) {
     const todo = itemInfo.item;
 
-    return <TodoItem key={todo.id} todo={todo} />;
+    return <TodoItem key={todo.id} todo={todo} onTap={onTodoTap} />;
   }
 
   // Combine users todos with shared todos
