@@ -4,11 +4,14 @@ import globalStyles from '../../styles/globalStyles.ts';
 import {Text} from 'react-native';
 import FixedBottomButton from '../../views/FixedBottomButton.tsx';
 import {useNavigation} from '@react-navigation/native';
+import {setOnboardingStatus} from '../../utils/storage.ts';
 
 export default function OnboardingScreen3() {
   const navigation = useNavigation();
 
-  function onContinue() {
+  async function onLetsGo() {
+    await setOnboardingStatus('seen');
+
     navigation.reset({
       index: 0,
       routes: [{name: 'Login'}],
@@ -18,7 +21,7 @@ export default function OnboardingScreen3() {
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <Text>Onboarding Teil 3</Text>
-      <FixedBottomButton text="Los geht's!" onTap={onContinue} />
+      <FixedBottomButton text="Los geht's!" onTap={onLetsGo} />
     </SafeAreaView>
   );
 }

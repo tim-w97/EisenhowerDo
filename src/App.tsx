@@ -32,7 +32,7 @@ export default function App(): React.JSX.Element {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Onboarding1"
+          initialRouteName="Login"
           screenOptions={{
             headerStyle: {
               ...colors.primary,

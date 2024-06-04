@@ -19,11 +19,13 @@ import selectCredentials from '../redux/selectors/selectCredentials.ts';
 import userSlice from '../redux/slices/userSlice.ts';
 import FixedBottomButton from '../views/FixedBottomButton.tsx';
 import showSnackbar from '../utils/showSnackbar.ts';
+import {getOnboardingStatus} from '../utils/storage.ts';
 
 type StackParamList = {
   // undefined means that this screen doesn't receive any params
   Login: undefined;
   MyTodos: undefined;
+  Onboarding1: undefined;
 };
 
 type Props = {
@@ -38,8 +40,22 @@ export default function LoginScreen({navigation}: Props) {
   const token = useAppSelector(selectToken());
   const error = useAppSelector(selectLoginError());
 
+  // Navigate to the onboarding if the user hasn't seen it yet
   useEffect(() => {
-    // if there is a token, the user is logged in
+    navigation.addListener('focus', async () => {
+      const onboardingStatus = await getOnboardingStatus();
+
+      if (onboardingStatus === 'notSeen') {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'Onboarding1'}],
+        });
+      }
+    });
+  }, [navigation]);
+
+  // If there is a token, navigate the user directly to the todos
+  useEffect(() => {
     if (token) {
       dispatch(userSlice.actions.clearCredentials());
 
@@ -50,6 +66,7 @@ export default function LoginScreen({navigation}: Props) {
     }
   }, [dispatch, navigation, token]);
 
+  // If there is any error, show a snackbar
   useEffect(() => {
     if (!error) {
       return;
