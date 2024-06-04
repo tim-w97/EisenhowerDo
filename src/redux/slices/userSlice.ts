@@ -7,14 +7,14 @@ import errorReducer from '../reducers/errorReducer.ts';
 import register from '../thunks/register.ts';
 import clearCredentials from '../reducers/clearCredentials.ts';
 import setCredentials from '../reducers/setCredentials.ts';
+import Config from 'react-native-config';
 
 export default createSlice({
   name: 'user',
   initialState: {
     credentials: {
-      // credentials for testing
-      username: 'lisa',
-      password: 'check',
+      username: Config.PREFILLED_USERNAME ?? '',
+      password: Config.PREFILLED_PASSWORD ?? '',
     },
     token: null,
     error: null,
