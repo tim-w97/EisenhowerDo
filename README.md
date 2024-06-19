@@ -6,23 +6,12 @@ Eine React Native-App zur Verwaltung von Todos, basierend auf dem Eisenhower-Pri
 
 ### Installationsanleitung für Android
 
-Info: Das Projekt habe ich mit Node v22.0.0 entwickelt.
+Info: 
 
-<br/>
+Dieses Projekt habe ich mit Node v22.0.0 entwickelt. Ob das Projekt mit einer anderen Node-Version funktioniert, kann ich nicht garantieren.
 
-Damit die App Anfragen an das Backend stellen kann, muss eine ```.env``` Datei mit der URL zum Backend erstellt werden.
 
-Im Projekt liegt bereits eine ```.env.example``` Datei, diese können Sie einfach kopieren und umbenennen:
-
-```shell
-$ cp .env.example .env
-```
-
-Falls Sie den Port des Backends ändern, müssen Sie diesen auch in der ```.env``` Datei ändern.
-
-<br/>
-
-Danach müssen die Abhängigkeiten installiert werden:
+Zuerst müssen Sie die Abhängigkeiten installieren:
 
 ```shell
 $ npm i
@@ -30,7 +19,17 @@ $ npm i
 
 <br/>
 
-Anschließend muss der Android-Emulator gestartet und folgender Befehl ausgeführt werden:
+Für die nächsten Schritte muss ein Android-Emulator aktiv sein.
+Sie können mit Android Studio einen Emulator starten oder alternativ mit folgendem Befehl über die Konsole:
+
+```shell
+$ ~/Library/Android/sdk/emulator/emulator -avd Pixel_7_API_34
+```
+Der Pfad zum Android SDK sowie der Gerätename könnten bei Ihnen abweichen.
+
+<br/>
+
+Anschließend muss folgender Befehl ausgeführt werden, um den Metro Bundler zu starten:
 
 ```shell
 $ npm start
